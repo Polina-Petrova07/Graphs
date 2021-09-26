@@ -1,5 +1,6 @@
 ﻿// GRaphs.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+
 //#define INPUT = true
 #undef INPUT
 
@@ -8,22 +9,23 @@
 #include <queue>
 #include <vector>
 #include "stdio.h"
-int main()
-{
-	std::vector < std::vector<int> > Graph;
-	const int NUMVERTEX = 5;
-	int start = 0;
+
+const int NUMVERTEX = 5;
+std::vector < std::vector<int> > Graph;
 #if defined(INPUT)
-		//custom graph
+//custom graph
 #else
-	int mas[NUMVERTEX][NUMVERTEX] = {
-		{0,1,0,1,0},
-		{1,0,1,0,0},
-		{0,1,0,1,0},
-		{1,0,1,0,1},
-		{0,0,0,1,0}
-	};
+int mas[NUMVERTEX][NUMVERTEX] = {
+	{0,1,0,1,0},
+	{1,0,1,1,1},
+	{0,1,0,1,0},
+	{1,1,1,0,0},
+	{0,1,0,0,0}
+};
 #endif
+std::vector<bool> used(NUMVERTEX);
+void Bfs(int start)
+{
 	for (int i = 0; i < NUMVERTEX; i++)
 	{
 		Graph.push_back(std::vector <int>());
@@ -35,7 +37,7 @@ int main()
 	}
 	std::queue <int> queue;
 	queue.push(start);
-	std::vector<bool> used(NUMVERTEX);
+	//std::vector<bool> used(NUMVERTEX);
 	std::vector<int> dist(NUMVERTEX);
 	std::vector<int> par(NUMVERTEX);
 	used[start] = true;
@@ -63,6 +65,20 @@ int main()
 	for (int i = 0; i < NUMVERTEX; i++)
 		std::cout << par[i] << " ";
 	std::cout << std::endl;
+}
+void Dfs(int start)
+{
+	std::cout << start <<" ";
+	used[start] = true;
+	for (int i = 0; i < NUMVERTEX; i++)
+		if (!used[i])
+			Dfs(i);
+}
+int main()
+{
+	int start = 0;
+	//Bfs(start);
+	Dfs(start);
 	return 0;
 }
 
