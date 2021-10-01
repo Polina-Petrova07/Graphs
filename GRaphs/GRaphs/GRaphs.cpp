@@ -12,19 +12,18 @@
 
 const int NUMVERTEX = 5;
 std::vector < std::vector<int> > Graph;
+std::vector<bool> used(NUMVERTEX);
 #if defined(INPUT)
-//custom graph
+//custom graph look main
 #else
 int mas[NUMVERTEX][NUMVERTEX] = {
 	{0,1,0,1,0},
-	{1,0,1,1,1},
+	{1,0,1,0,0},
 	{0,1,0,1,0},
-	{1,1,1,0,0},
-	{0,1,0,0,0}
+	{1,0,1,0,1},
+	{0,0,0,1,0}
 };
-#endif
-std::vector<bool> used(NUMVERTEX);
-void Bfs(int start)
+void masGraph(int mas[NUMVERTEX][NUMVERTEX], std::vector < std::vector<int> > Graph)
 {
 	for (int i = 0; i < NUMVERTEX; i++)
 	{
@@ -35,6 +34,22 @@ void Bfs(int start)
 			Graph[i][j] = mas[i][j];
 		}
 	}
+}
+#endif
+
+void Bfs(int start)
+{
+#if !defined(INPUT)
+	for (int i = 0; i < NUMVERTEX; i++)
+	{
+		Graph.push_back(std::vector <int>());
+		for (int j = 0; j < NUMVERTEX; j++)
+		{
+			Graph[i].push_back(0);
+			Graph[i][j] = mas[i][j];
+		}
+	}
+#endif
 	std::queue <int> queue;
 	queue.push(start);
 	//std::vector<bool> used(NUMVERTEX);
@@ -71,13 +86,64 @@ void Dfs(int start)
 	std::cout << start <<" ";
 	used[start] = true;
 	for (int i = 0; i < NUMVERTEX; i++)
-		if (!used[i])
+		if (!used[i] && Graph[start][i])
 			Dfs(i);
 }
 int main()
 {
+	//std::vector < std::vector<int> > Graph;
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	Graph.push_back(std::vector <int>());
+	//	for (int j = 0; j < NUMVERTEX; j++)
+	//	{
+	//		Graph[i].push_back(0);
+	//		Graph[i][j] = 1;
+	//	}
+	//}
+#if defined (INPUT)
+	std::cout << "enter the number of vertices" << std::endl;
+	int numVert;
+	bool f;
+	std::cin >> numVert;
+	//std::vector < std::vector<int> > Graph;
+
+	for (int i = 0; i < numVert; i++)
+	{
+		Graph.push_back(std::vector <int>());
+		for (int j = 0; j < numVert; j++)
+		{
+			std::cout << "is there a rib between: " << i << " and " << j << std::endl;
+			std::cin >> f;
+			if (f == true)
+			{
+				Graph[i].push_back(0);
+				Graph[i][j] = 1;
+			}
+			else
+			{
+				Graph[i].push_back(0);
+				Graph[i][j] = 0;
+			}
+				
+		}
+	}
+	std::cout << std::endl;
+	std::cout << "adjacency matrix:" << std::endl << std::endl;
+	for (int i = 0; i < numVert; i++)
+	{
+		for (int j = 0; j < numVert; j++)
+		{
+			std::cout << " "<<Graph[i][j]<<" ";
+		}
+		std::cout << std::endl;
+	}
+#endif
 	int start = 0;
+	//std::cout << std::endl << std::endl << "BFS: "<<std::endl;
 	//Bfs(start);
+	masGraph(mas, Graph);
+	std::cout << std::endl << std::endl << "DFS: " << std::endl;
 	Dfs(start);
 	return 0;
 }
