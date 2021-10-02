@@ -1,8 +1,8 @@
 ﻿// GRaphs.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
-//#define INPUT = true
-#undef INPUT
+#define INPUT = true
+//#undef INPUT
 
 #include <iostream>
 #include <list>
@@ -10,51 +10,32 @@
 #include <vector>
 #include "stdio.h"
 
+#if !defined (INPUT)
 const int NUMVERTEX = 5;
+#else
+int NUMVERTEX;
+#endif
 std::vector < std::vector<int> > Graph;
-std::vector<bool> used(NUMVERTEX);
+//std::vector<bool> used(NUMVERTEX);
 #if defined(INPUT)
 //custom graph look main
 #else
 int mas[NUMVERTEX][NUMVERTEX] = {
-	{0,1,0,1,0},
-	{1,0,1,0,0},
-	{0,1,0,1,0},
-	{1,0,1,0,1},
-	{0,0,0,1,0}
+	{0,1,1,0,1},
+	{1,0,0,1,0},
+	{1,0,0,0,0},
+	{0,1,0,0,0},
+	{1,0,0,0,0}
 };
-void masGraph(int mas[NUMVERTEX][NUMVERTEX], std::vector < std::vector<int> > Graph)
-{
-	for (int i = 0; i < NUMVERTEX; i++)
-	{
-		Graph.push_back(std::vector <int>());
-		for (int j = 0; j < NUMVERTEX; j++)
-		{
-			Graph[i].push_back(0);
-			Graph[i][j] = mas[i][j];
-		}
-	}
-}
 #endif
 
 void Bfs(int start)
 {
-#if !defined(INPUT)
-	for (int i = 0; i < NUMVERTEX; i++)
-	{
-		Graph.push_back(std::vector <int>());
-		for (int j = 0; j < NUMVERTEX; j++)
-		{
-			Graph[i].push_back(0);
-			Graph[i][j] = mas[i][j];
-		}
-	}
-#endif
 	std::queue <int> queue;
 	queue.push(start);
-	//std::vector<bool> used(NUMVERTEX);
 	std::vector<int> dist(NUMVERTEX);
 	std::vector<int> par(NUMVERTEX);
+	std::vector<bool> used(NUMVERTEX);
 	used[start] = true;
 	par[start] = -1;
 	while (!queue.empty())
@@ -81,33 +62,25 @@ void Bfs(int start)
 		std::cout << par[i] << " ";
 	std::cout << std::endl;
 }
+std::vector<bool> usedd(NUMVERTEX);
 void Dfs(int start)
 {
 	std::cout << start <<" ";
-	used[start] = true;
+	usedd[start] = true;
 	for (int i = 0; i < NUMVERTEX; i++)
-		if (!used[i] && Graph[start][i])
+		if (!usedd[i] && Graph[start][i]!=0)
 			Dfs(i);
 }
 int main()
 {
-	//std::vector < std::vector<int> > Graph;
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	Graph.push_back(std::vector <int>());
-	//	for (int j = 0; j < NUMVERTEX; j++)
-	//	{
-	//		Graph[i].push_back(0);
-	//		Graph[i][j] = 1;
-	//	}
-	//}
 #if defined (INPUT)
 	std::cout << "enter the number of vertices" << std::endl;
 	int numVert;
 	bool f;
 	std::cin >> numVert;
-	//std::vector < std::vector<int> > Graph;
-
+	NUMVERTEX = numVert;
+	std::vector<bool> used_dfs(NUMVERTEX);
+	usedd = used_dfs;
 	for (int i = 0; i < numVert; i++)
 	{
 		Graph.push_back(std::vector <int>());
@@ -138,12 +111,21 @@ int main()
 		}
 		std::cout << std::endl;
 	}
+#else
+	for (int i = 0; i < NUMVERTEX; i++)
+	{
+		Graph.push_back(std::vector <int>());
+		for (int j = 0; j < NUMVERTEX; j++)
+		{
+			Graph[i].push_back(0);
+			Graph[i][j] = mas[i][j];
+		}
+	}
 #endif
 	int start = 0;
-	//std::cout << std::endl << std::endl << "BFS: "<<std::endl;
-	//Bfs(start);
-	masGraph(mas, Graph);
-	std::cout << std::endl << std::endl << "DFS: " << std::endl;
+	std::cout << std::endl << std::endl << "BFS: " << std::endl;
+	Bfs(start);
+	std::cout << std::endl << "DFS: " << std::endl;
 	Dfs(start);
 	return 0;
 }
