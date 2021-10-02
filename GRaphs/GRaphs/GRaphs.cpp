@@ -1,8 +1,8 @@
 ﻿// GRaphs.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
-#define INPUT = true
-//#undef INPUT
+//#define INPUT = true
+#undef INPUT
 
 #include <iostream>
 #include <list>
@@ -112,7 +112,7 @@ int main()
 		std::cout << std::endl;
 	}
 #else
-	for (int i = 0; i < NUMVERTEX; i++)
+	/*for (int i = 0; i < NUMVERTEX; i++)
 	{
 		Graph.push_back(std::vector <int>());
 		for (int j = 0; j < NUMVERTEX; j++)
@@ -120,13 +120,45 @@ int main()
 			Graph[i].push_back(0);
 			Graph[i][j] = mas[i][j];
 		}
-	}
+	}*/
 #endif
-	int start = 0;
+	/*int start = 0;
 	std::cout << std::endl << std::endl << "BFS: " << std::endl;
 	Bfs(start);
 	std::cout << std::endl << "DFS: " << std::endl;
-	Dfs(start);
+	Dfs(start);*/
+
+	int numVert, k, l;
+	std::vector<int> mas;
+	std::vector<int> mas1;
+	mas1.push_back(0);
+	std::cout << "enter the number of vertices" << std::endl;
+	std::cin >> numVert;
+	for (int i = 0; i < numVert; i++)
+	{
+		std::cout << "with how many connection vertices? " <<i<< std::endl; //сколько от i
+		std::cin >> l;
+		for (int j = 0; j < l; j++)
+		{
+			std::cout << "what is connected with " << i << std::endl; //какие от i
+			std::cin >> k;
+			mas.push_back(k);
+		}
+		mas1.push_back(mas.size()+1);
+	}
+
+	std::cout << "mas connectes vertex: ";
+	for (int i = 0; i < mas.size(); i++)
+	{
+	std::cout << mas[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "mas index vertex: ";
+	for (int i = 0; i < mas1.size(); i++)
+	{
+		std::cout<< mas1[i] << " ";
+	}
+
 	return 0;
 }
 
