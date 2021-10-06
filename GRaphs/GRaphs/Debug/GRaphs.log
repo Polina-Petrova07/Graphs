@@ -1,7 +1,9 @@
 ﻿  GRaphs.cpp
-C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(51,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(57,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(156,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(169,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(173,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(66,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(72,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(129,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(177,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(190,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(194,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\GRaphs.cpp(251,9): warning C4101: f1: неиспользованная локальная переменная
   GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\Debug\GRaphs.exe

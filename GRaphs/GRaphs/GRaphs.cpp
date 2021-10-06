@@ -1,8 +1,8 @@
 ﻿// GRaphs.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
-//#define INPUT = true
-#undef INPUT
+#define INPUT = true
+//#undef INPUT
 
 #include <iostream>
 #include <list>
@@ -10,7 +10,22 @@
 #include <vector>
 #include "stdio.h"
 
+#if defined(INPUT)
+int NUMVERTEX;
+//custom graph look main
+#else
+const int NUMVERTEX = 5;
+int mas[NUMVERTEX][NUMVERTEX] = {
+	{0,1,1,0,1},
+	{1,0,0,1,0},
+	{1,0,0,0,0},
+	{0,1,0,0,0},
+	{1,0,0,0,0}
+};
+#endif
+
 std::vector < std::vector<int> > Graph;
+std::vector<bool> usedd(NUMVERTEX);
 
 class crsType {
 private:
@@ -64,6 +79,7 @@ class matrixType {
 private:
 	int numVert;
 	std::vector< std::vector<int> > Graph;
+	int* color;
 public:
 	matrixType(int numVert)
 	{
@@ -72,6 +88,7 @@ public:
 		//int num;
 		//std::cin >> num;
 		this->numVert = numVert;
+		color = new int[numVert];
 		//NUMVERTEX = numVert;
 		//std::vector<bool> used_dfs(NUMVERTEX);
 		//usedd = used_dfs;
@@ -94,11 +111,30 @@ public:
 				}
 
 			}
+			color[i] = 0;
 		}
 	}
 	int getNumVert()
 	{
 		return numVert;
+	}
+	int* getMasColor()
+	{
+		return color;
+	}
+	void loopSearch(int start, bool f)
+	{
+		std::cout << start << " ";
+		color[start] = 1;
+		for (int i = 0; i < Graph[start].size(); ++i)
+			if (color[Graph[start][i]] == 0)
+				loopSearch(Graph[start][i], f);
+			else
+			{
+				if (color[Graph[start][i]] == 1)
+					f = true;
+				color[start] = 2;
+			}
 	}
 	int& operator ()(int i, int j)
 	{
@@ -117,21 +153,14 @@ public:
 			std::cout << std::endl;
 		}
 	}
+	void printMasColor()
+	{
+		for (int i = 0; i < numVert; i++)
+		{
+			std::cout << "color " << i << ": " << color[i] << std::endl;;
+		}
+	}
 };
-
-#if defined(INPUT)
-int NUMVERTEX;
-//custom graph look main
-#else
-const int NUMVERTEX = 5;
-int mas[NUMVERTEX][NUMVERTEX] = {
-	{0,1,1,0,1},
-	{1,0,0,1,0},
-	{1,0,0,0,0},
-	{0,1,0,0,0},
-	{1,0,0,0,0}
-};
-#endif
 
 void Bfs(int start)
 {
@@ -166,7 +195,7 @@ void Bfs(int start)
 		std::cout << par[i] << " ";
 	std::cout << std::endl;
 }
-std::vector<bool> usedd(NUMVERTEX);
+
 void Dfs(int start)
 {
 	std::cout << start <<" ";
@@ -214,10 +243,30 @@ int main()
 	}
 #endif
 	int start = 0;
-	std::cout << std::endl << std::endl << "BFS: " << std::endl;
-	Bfs(start);
-	std::cout << std::endl << "DFS: " << std::endl;
-	Dfs(start);
+	//std::cout << std::endl << std::endl << "BFS: " << std::endl;
+	//Bfs(start);
+	//std::cout << std::endl << "DFS: " << std::endl;
+	//Dfs(start);
+
+	bool f,f1;
+	f = false;
+	int* mas;
+	mas = G.getMasColor();
+	for (int i = 0; i < num; i++)
+	{
+		if (mas[i] == 0)
+		   G.loopSearch(i,f);
+	}
+	
+	std::cout << std::endl;
+	std::cout << std::endl;
+	if (f == true)
+		std::cout << "YEA";
+	else
+		std::cout << "NO";
+	std::cout << std::endl;
+	std::cout << std::endl;
+	G.printMasColor();
 
 	return 0;
 }
