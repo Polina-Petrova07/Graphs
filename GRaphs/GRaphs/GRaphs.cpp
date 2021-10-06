@@ -10,16 +10,120 @@
 #include <vector>
 #include "stdio.h"
 
-#if !defined (INPUT)
-const int NUMVERTEX = 5;
-#else
-int NUMVERTEX;
-#endif
 std::vector < std::vector<int> > Graph;
-//std::vector<bool> used(NUMVERTEX);
+
+class crsType {
+private:
+	std::vector<int> mas;
+	std::vector<int> mas1;
+public:
+	crsType()
+	{
+		int numVert, k, l;
+		mas1.push_back(0);
+		std::cout << "enter the number of vertices" << std::endl;
+		std::cin >> numVert;
+		for (int i = 0; i < numVert; i++)
+		{
+			std::cout << "with how many connection vertices? " << i << std::endl; //сколько от i
+			std::cin >> l;
+			for (int j = 0; j < l; j++)
+			{
+				std::cout << "what is connected with " << i << std::endl; //какие от i
+				std::cin >> k;
+				mas.push_back(k);
+			}
+			mas1.push_back(mas.size() + 1);
+		}
+	}
+	crsType(std::vector<int> mas, std::vector<int> mas1)
+	{
+		this->mas = mas;
+		this->mas1 = mas1;
+	}
+	~crsType()
+	{
+
+	}
+	void print()
+	{
+		std::cout << "mas connectes vertex: ";
+		for (int i = 0; i < mas.size(); i++)
+		{
+			std::cout << mas[i] << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "mas index vertex: ";
+		for (int i = 0; i < mas1.size(); i++)
+		{
+			std::cout << mas1[i] << " ";
+		}
+	}
+};
+class matrixType {
+private:
+	int numVert;
+	std::vector< std::vector<int> > Graph;
+public:
+	matrixType(int numVert)
+	{
+		//std::cout << "enter the number of vertices" << std::endl;
+		bool f;
+		//int num;
+		//std::cin >> num;
+		this->numVert = numVert;
+		//NUMVERTEX = numVert;
+		//std::vector<bool> used_dfs(NUMVERTEX);
+		//usedd = used_dfs;
+		for (int i = 0; i < numVert; i++)
+		{
+			Graph.push_back(std::vector <int>());
+			for (int j = 0; j < numVert; j++)
+			{
+				std::cout << "is there a rib between: " << i << " and " << j << std::endl;
+				std::cin >> f;
+				if (f == true)
+				{
+					Graph[i].push_back(0);
+					Graph[i][j] = 1;
+				}
+				else
+				{
+					Graph[i].push_back(0);
+					Graph[i][j] = 0;
+				}
+
+			}
+		}
+	}
+	int getNumVert()
+	{
+		return numVert;
+	}
+	int& operator ()(int i, int j)
+	{
+		return Graph[i][j];
+	}
+	void printMatrix()
+	{
+		std::cout << std::endl;
+		std::cout << "adjacency matrix:" << std::endl << std::endl;
+		for (int i = 0; i < numVert; i++)
+		{
+			for (int j = 0; j < numVert; j++)
+			{
+				std::cout << " " << Graph[i][j] << " ";
+			}
+			std::cout << std::endl;
+		}
+	}
+};
+
 #if defined(INPUT)
+int NUMVERTEX;
 //custom graph look main
 #else
+const int NUMVERTEX = 5;
 int mas[NUMVERTEX][NUMVERTEX] = {
 	{0,1,1,0,1},
 	{1,0,0,1,0},
@@ -54,11 +158,11 @@ void Bfs(int start)
 		queue.pop();
 	}
 	std::cout << "distance: ";
-	for (int i = 0; i < NUMVERTEX; i++)
+	for (int i = 0; i < dist.size(); i++)
 		std::cout << dist[i] << " ";
 	std::cout << std::endl;
 	std::cout << "parents: ";
-	for (int i = 0; i < NUMVERTEX; i++)
+	for (int i = 0; i < par.size(); i++)
 		std::cout << par[i] << " ";
 	std::cout << std::endl;
 }
@@ -71,48 +175,35 @@ void Dfs(int start)
 		if (!usedd[i] && Graph[start][i]!=0)
 			Dfs(i);
 }
+
 int main()
 {
 #if defined (INPUT)
+	int num;
 	std::cout << "enter the number of vertices" << std::endl;
-	int numVert;
-	bool f;
-	std::cin >> numVert;
-	NUMVERTEX = numVert;
+	std::cin >> num;
+	matrixType G(num);
+	G.printMatrix();
+	std::cout << std::endl;
+	NUMVERTEX = G.getNumVert();
+	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
 	std::vector<bool> used_dfs(NUMVERTEX);
 	usedd = used_dfs;
-	for (int i = 0; i < numVert; i++)
+
+	for (int i = 0; i < NUMVERTEX; i++)
 	{
 		Graph.push_back(std::vector <int>());
-		for (int j = 0; j < numVert; j++)
+		for (int j = 0; j < NUMVERTEX; j++)
 		{
-			std::cout << "is there a rib between: " << i << " and " << j << std::endl;
-			std::cin >> f;
-			if (f == true)
-			{
-				Graph[i].push_back(0);
-				Graph[i][j] = 1;
-			}
-			else
-			{
-				Graph[i].push_back(0);
-				Graph[i][j] = 0;
-			}
-				
+			Graph[i].push_back(0);
+			Graph[i][j] = G(i, j);
 		}
 	}
 	std::cout << std::endl;
-	std::cout << "adjacency matrix:" << std::endl << std::endl;
-	for (int i = 0; i < numVert; i++)
-	{
-		for (int j = 0; j < numVert; j++)
-		{
-			std::cout << " "<<Graph[i][j]<<" ";
-		}
-		std::cout << std::endl;
-	}
+
+	
 #else
-	/*for (int i = 0; i < NUMVERTEX; i++)
+	for (int i = 0; i < NUMVERTEX; i++)
 	{
 		Graph.push_back(std::vector <int>());
 		for (int j = 0; j < NUMVERTEX; j++)
@@ -120,44 +211,13 @@ int main()
 			Graph[i].push_back(0);
 			Graph[i][j] = mas[i][j];
 		}
-	}*/
+	}
 #endif
-	/*int start = 0;
+	int start = 0;
 	std::cout << std::endl << std::endl << "BFS: " << std::endl;
 	Bfs(start);
 	std::cout << std::endl << "DFS: " << std::endl;
-	Dfs(start);*/
-
-	int numVert, k, l;
-	std::vector<int> mas;
-	std::vector<int> mas1;
-	mas1.push_back(0);
-	std::cout << "enter the number of vertices" << std::endl;
-	std::cin >> numVert;
-	for (int i = 0; i < numVert; i++)
-	{
-		std::cout << "with how many connection vertices? " <<i<< std::endl; //сколько от i
-		std::cin >> l;
-		for (int j = 0; j < l; j++)
-		{
-			std::cout << "what is connected with " << i << std::endl; //какие от i
-			std::cin >> k;
-			mas.push_back(k);
-		}
-		mas1.push_back(mas.size()+1);
-	}
-
-	std::cout << "mas connectes vertex: ";
-	for (int i = 0; i < mas.size(); i++)
-	{
-	std::cout << mas[i] << " ";
-	}
-	std::cout << std::endl;
-	std::cout << "mas index vertex: ";
-	for (int i = 0; i < mas1.size(); i++)
-	{
-		std::cout<< mas1[i] << " ";
-	}
+	Dfs(start);
 
 	return 0;
 }
