@@ -26,6 +26,50 @@ int mas[NUMVERTEX][NUMVERTEX] = {
 
 std::vector < std::vector<int> > Graph;
 std::vector<bool> usedd(NUMVERTEX);
+bool F = false;
+
+void Bfs(int start)
+{
+	std::queue <int> queue;
+	queue.push(start);
+	std::vector<int> dist(NUMVERTEX);
+	std::vector<int> par(NUMVERTEX);
+	std::vector<bool> used(NUMVERTEX);
+	used[start] = true;
+	par[start] = -1;
+	while (!queue.empty())
+	{
+		int vertex = queue.front();
+		for (int i = 0; i < Graph[vertex].size(); ++i)
+		{
+			if (!used[i] && Graph[vertex][i])
+			{
+				used[i] = true;
+				queue.push(i);
+				dist[i] = dist[vertex] + 1;
+				par[i] = vertex;
+			}
+		}
+		queue.pop();
+	}
+	std::cout << "distance: ";
+	for (int i = 0; i < dist.size(); i++)
+		std::cout << dist[i] << " ";
+	std::cout << std::endl;
+	std::cout << "parents: ";
+	for (int i = 0; i < par.size(); i++)
+		std::cout << par[i] << " ";
+	std::cout << std::endl;
+}
+
+void Dfs(int start)
+{
+	std::cout << start << " ";
+	usedd[start] = true;
+	for (int i = 0; i < NUMVERTEX; i++)
+		if (!usedd[i] && Graph[start][i] != 0)
+			Dfs(i);
+}
 
 class crsType {
 private:
@@ -122,19 +166,32 @@ public:
 	{
 		return color;
 	}
-	void loopSearch(int start, bool f)
+	void loopSearch(int start)
 	{
 		std::cout << start << " ";
 		color[start] = 1;
 		for (int i = 0; i < Graph[start].size(); ++i)
 			if (color[Graph[start][i]] == 0)
-				loopSearch(Graph[start][i], f);
+				loopSearch(Graph[start][i]);
 			else
 			{
 				if (color[Graph[start][i]] == 1)
-					f = true;
-				color[start] = 2;
+					F = true;
 			}
+		color[start] = 2;
+	}
+	int NComp(int n)
+	{
+		n = 0;
+		for (int i = 0; i < numVert; i++)
+		{
+			if (!usedd[i])
+			{
+				++n;
+				Dfs(i);
+			}
+		}
+		return n;
 	}
 	int& operator ()(int i, int j)
 	{
@@ -161,49 +218,6 @@ public:
 		}
 	}
 };
-
-void Bfs(int start)
-{
-	std::queue <int> queue;
-	queue.push(start);
-	std::vector<int> dist(NUMVERTEX);
-	std::vector<int> par(NUMVERTEX);
-	std::vector<bool> used(NUMVERTEX);
-	used[start] = true;
-	par[start] = -1;
-	while (!queue.empty())
-	{
-		int vertex = queue.front();
-		for (int i = 0; i < Graph[vertex].size(); ++i)
-		{
-			if (!used[i] && Graph[vertex][i])
-			{
-				used[i] = true;
-				queue.push(i);
-				dist[i] = dist[vertex] + 1;
-				par[i] = vertex;
-			}
-		}
-		queue.pop();
-	}
-	std::cout << "distance: ";
-	for (int i = 0; i < dist.size(); i++)
-		std::cout << dist[i] << " ";
-	std::cout << std::endl;
-	std::cout << "parents: ";
-	for (int i = 0; i < par.size(); i++)
-		std::cout << par[i] << " ";
-	std::cout << std::endl;
-}
-
-void Dfs(int start)
-{
-	std::cout << start <<" ";
-	usedd[start] = true;
-	for (int i = 0; i < NUMVERTEX; i++)
-		if (!usedd[i] && Graph[start][i]!=0)
-			Dfs(i);
-}
 
 int main()
 {
@@ -248,27 +262,34 @@ int main()
 	//std::cout << std::endl << "DFS: " << std::endl;
 	//Dfs(start);
 
-	bool f,f1;
-	f = false;
+	/*bool f;
+	f = false;*/
 	int* mas;
 	mas = G.getMasColor();
+
 	for (int i = 0; i < num; i++)
 	{
 		if (mas[i] == 0)
-		   G.loopSearch(i,f);
+		   G.loopSearch(i);
 	}
 	
 	std::cout << std::endl;
 	std::cout << std::endl;
-	if (f == true)
+	if (F == true)
 		std::cout << "YEA";
 	else
 		std::cout << "NO";
+
 	std::cout << std::endl;
 	std::cout << std::endl;
 	G.printMasColor();
 
-	return 0;
+	/*int n = 0, k;
+	k = G.NComp(n);
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << k;
+	return 0;*/
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
