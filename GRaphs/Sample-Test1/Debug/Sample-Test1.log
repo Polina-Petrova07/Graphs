@@ -1,0 +1,10 @@
+﻿  test.cpp
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(22,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(35,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(39,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(100,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(41,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(47,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\Sample-Test1\test.cpp(31,2): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "ASSERT_NO_THROW"
+C:\Users\user\Graphs\GRaphs\Sample-Test1\test.cpp(31,2): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "GTEST_SUPPRESS_UNREACHABLE_CODE_WARNING_BELOW_"
+  Sample-Test1.vcxproj -> C:\Users\user\Graphs\GRaphs\Debug\Sample-Test1.exe
