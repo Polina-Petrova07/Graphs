@@ -26,7 +26,6 @@ int mas[NUMVERTEX][NUMVERTEX] = {
 
 std::vector < std::vector<int> > Graph;
 std::vector<bool> usedd(NUMVERTEX);
-bool F = false;
 
 void Bfs(int start)
 {
@@ -127,15 +126,10 @@ private:
 public:
 	matrixType(int numVert)
 	{
-		//std::cout << "enter the number of vertices" << std::endl;
-		bool f;
-		//int num;
-		//std::cin >> num;
+		std::cout << "if the graph is weight-bearing, for a nonexistent edge, put -1 " << std::endl;
+		int f;
 		this->numVert = numVert;
 		color = new int[numVert];
-		//NUMVERTEX = numVert;
-		//std::vector<bool> used_dfs(NUMVERTEX);
-		//usedd = used_dfs;
 		for (int i = 0; i < numVert; i++)
 		{
 			Graph.push_back(std::vector <int>());
@@ -143,7 +137,9 @@ public:
 			{
 				std::cout << "is there a rib between: " << i << " and " << j << std::endl;
 				std::cin >> f;
-				if (f == true)
+				Graph[i].push_back(0);
+				Graph[i][j] = f;
+				/*if (f == true)
 				{
 					Graph[i].push_back(0);
 					Graph[i][j] = 1;
@@ -152,8 +148,7 @@ public:
 				{
 					Graph[i].push_back(0);
 					Graph[i][j] = 0;
-				}
-
+				}*/
 			}
 			color[i] = 0;
 		}
@@ -166,19 +161,20 @@ public:
 	{
 		return color;
 	}
-	void loopSearch(int start)
+	bool loopSearch(int start,bool f)
 	{
 		std::cout << start << " ";
 		color[start] = 1;
 		for (int i = 0; i < Graph[start].size(); ++i)
 			if (color[Graph[start][i]] == 0)
-				loopSearch(Graph[start][i]);
+				loopSearch(Graph[start][i], f);
 			else
 			{
 				if (color[Graph[start][i]] == 1)
-					F = true;
+					f = true;
 			}
 		color[start] = 2;
+		return f;
 	}
 	int NComp(int n)
 	{
@@ -192,6 +188,50 @@ public:
 			}
 		}
 		return n;
+	}
+	void Dijkstra(int start)
+	{
+		int* dist = new int[numVert];
+		int* used = new int[numVert];
+		for (int i = 0; i < numVert; i++)
+		{
+			dist[i] = INT_MAX;
+			used[i] = 0;
+		}
+		dist[start] = 0;
+		for (int i = 0; i < numVert; i++)
+		{
+			int c = INT_MAX, min;
+			for (int j = 0; j < numVert; j++)
+			{
+				if ((dist[j] < c) && (!used[j]))
+				{
+					min = j;
+					c = dist[j];
+				}
+			}
+			for (int j = 0; j < numVert; j++)
+			{
+				if (Graph[min][j] != -1)
+					if ((dist[j] > Graph[min][j] + c) && !used[j])
+						dist[j] = Graph[min][j] + c;
+			}
+			used[min] = 1;
+		}
+		for (int i = 0; i < NUMVERTEX; i++)
+		{
+
+			if (dist[i] != INT_MAX)
+			{
+				std::cout << "distance from " << start << " to " << i << " :" << dist[i];
+				std::cout << std::endl;
+			}
+			else
+			{
+				std::cout << "form " << start << " to " << i << " no way";
+				std::cout << std::endl;
+			}
+		}
 	}
 	int& operator ()(int i, int j)
 	{
@@ -256,40 +296,44 @@ int main()
 		}
 	}
 #endif
-	int start = 0;
+	int start = 2;
 	//std::cout << std::endl << std::endl << "BFS: " << std::endl;
 	//Bfs(start);
 	//std::cout << std::endl << "DFS: " << std::endl;
 	//Dfs(start);
 
 	/*bool f;
-	f = false;*/
+	f = false;
 	int* mas;
 	mas = G.getMasColor();
 
 	for (int i = 0; i < num; i++)
 	{
 		if (mas[i] == 0)
-		   G.loopSearch(i);
+		  f= G.loopSearch(i,f);
 	}
 	
 	std::cout << std::endl;
 	std::cout << std::endl;
-	if (F == true)
-		std::cout << "YEA";
-	else
-		std::cout << "NO";
+	std::cout << std::endl;
+	std::cout <<"yea   "<< f;
+	
 
 	std::cout << std::endl;
 	std::cout << std::endl;
-	G.printMasColor();
+	G.printMasColor();*/
 
 	/*int n = 0, k;
 	k = G.NComp(n);
 	std::cout << std::endl;
 	std::cout << std::endl;
-	std::cout << k;
-	return 0;*/
+	std::cout << k;*/
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+	
+	G.Dijkstra(start);
+	return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
