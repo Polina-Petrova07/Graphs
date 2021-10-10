@@ -85,6 +85,16 @@ public:
 			color[i] = 0;
 		}
 	}
+	matrixType(std::vector< std::vector<int>> G, int numVert)
+	{
+		this->Graph = G;
+		this->numVert = numVert;
+		color = new int[numVert];
+		for (int i = 0; i < numVert; i++)
+		{
+			color[i] = 0;
+		}
+	}
 	int getNumVert()
 	{
 		return numVert;
