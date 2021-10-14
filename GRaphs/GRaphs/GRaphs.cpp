@@ -8,6 +8,8 @@
 #include <list>
 #include <queue>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 #include "stdio.h"
 #include "matrixType.h"
 #include "crsType.h"
@@ -264,7 +266,8 @@ int mas[NUMVERTEX][NUMVERTEX] = {
 
 int main()
 {
-#if defined (INPUT)
+#if defined (INPUT)   //make graph
+
 	/*int num;
 	std::cout << "enter the number of vertices" << std::endl;
 	std::cin >> num;
@@ -286,7 +289,6 @@ int main()
 		}
 	}
 	std::cout << std::endl;*/
-
 	
 #else
 	for (int i = 0; i < NUMVERTEX; i++)
@@ -300,6 +302,7 @@ int main()
 	}
 #endif
 	int start = 0;
+
 	/*bool f;
 	f = false;
 	int* mas;
@@ -328,12 +331,19 @@ int main()
 	k = G.NComp(n);
 	std::cout <<"Ncomp"<< k;
 	std::cout << std::endl;
-	std::cout << std::endl;
-	
-	G.Dijkstra(start);*/
-	crsType G;
-	G.print();
+	std::cout << std::endl;*/
 
+	//srand(time(NULL));
+	matrixType G;
+	G.printMatrix();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	NUMVERTEX = G.getNumVert(); //!!!
+	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	G.Dijkstra(start);
+	
 	return 0;
 }
 

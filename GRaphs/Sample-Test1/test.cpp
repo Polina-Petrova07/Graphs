@@ -387,6 +387,78 @@ TEST(matrixType, right_searchloop_1)
 	}
 	EXPECT_EQ(f, true);
 }
+TEST(matrixType, right_Dijkstra_0)
+{
+	std::vector< std::vector<int> > Graph;
+	const int NUMVERTEX = 4;
+	int mas[NUMVERTEX][NUMVERTEX] = {
+		{-1,5,3,-1},
+		{5,-1,1,3},
+		{3,1,-1,4},
+		{-1,3,4,-1},
+	};
+	for (int i = 0; i < NUMVERTEX; i++)
+	{
+		Graph.push_back(std::vector <int>());
+		for (int j = 0; j < NUMVERTEX; j++)
+		{
+			Graph[i].push_back(0);
+			Graph[i][j] = mas[i][j];
+		}
+	}
+	matrixType G(Graph, NUMVERTEX);
+	int* mas1;
+	mas1 = G.Dijkstra(0);
+	EXPECT_EQ(mas1[3], 7);
+}
+TEST(matrixType, right_Dijkstra_1)
+{
+	std::vector< std::vector<int> > Graph;
+	const int NUMVERTEX = 4;
+	int mas[NUMVERTEX][NUMVERTEX] = {
+		{-1,5,3,-1},
+		{5,-1,1,3},
+		{3,1,-1,4},
+		{-1,3,4,-1},
+	};
+	for (int i = 0; i < NUMVERTEX; i++)
+	{
+		Graph.push_back(std::vector <int>());
+		for (int j = 0; j < NUMVERTEX; j++)
+		{
+			Graph[i].push_back(0);
+			Graph[i][j] = mas[i][j];
+		}
+	}
+	matrixType G(Graph, NUMVERTEX);
+	int* mas1;
+	mas1 = G.Dijkstra(0);
+	EXPECT_EQ(mas1[1], 4);
+}
+TEST(matrixType, right_Dijkstra_2)
+{
+	std::vector< std::vector<int> > Graph;
+	const int NUMVERTEX = 4;
+	int mas[NUMVERTEX][NUMVERTEX] = {
+		{-1,3,-1,-1},
+		{3,-1,1,2},
+		{-1,1,-1,2},
+		{-1,2,2,-1},
+	};
+	for (int i = 0; i < NUMVERTEX; i++)
+	{
+		Graph.push_back(std::vector <int>());
+		for (int j = 0; j < NUMVERTEX; j++)
+		{
+			Graph[i].push_back(0);
+			Graph[i][j] = mas[i][j];
+		}
+	}
+	matrixType G(Graph, NUMVERTEX);
+	int* mas1;
+	mas1 = G.Dijkstra(3);
+	EXPECT_EQ(mas1[0],5);
+}
 
 
 
