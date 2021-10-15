@@ -112,16 +112,6 @@ public:
 				std::cin >> f;
 				Graph[i].push_back(0);
 				Graph[i][j] = f;
-				/*if (f == true)
-				{
-					Graph[i].push_back(0);
-					Graph[i][j] = 1;
-				}
-				else
-				{
-					Graph[i].push_back(0);
-					Graph[i][j] = 0;
-				}*/
 			}
 			color[i] = 0;
 		}
@@ -172,7 +162,7 @@ public:
 		}
 		return n;
 	}
-	int* Dijkstra(int start)
+	void Dijkstra(int start)
 	{
 		int* dist = new int[numVert];
 		int* used = new int[numVert];
@@ -214,7 +204,7 @@ public:
 				std::cout << std::endl;
 			}
 		}
-		return dist;
+		//return dist;
 	}
 	void DijekstraQ(int start)   //работает только если все веса меньше количества вершин (ошибка в строке 193)
 	{
@@ -241,7 +231,6 @@ public:
 		}
 		for (int i = 0; i < NUMVERTEX; i++)
 		{
-
 			if (d[i] != INT_MAX)
 			{
 				std::cout << "distance from " << start << " to " << i << " :" << d[i];
@@ -276,6 +265,75 @@ public:
 		for (int i = 0; i < numVert; i++)
 		{
 			std::cout << "color " << i << ": " << color[i] << std::endl;;
+		}
+	}
+};
+class pairTipe {
+private:
+	std::vector< std::vector <std::pair <int, int> > > Graph;
+	int numVert;
+public:
+	pairTipe(matrixType G)
+	{
+		this->numVert = G.getNumVert();
+		for (int i = 0; i < numVert; i++)
+		{
+			Graph.push_back(std::vector< std::pair<int, int> >());
+			for (int j = 0; j < numVert; j++)
+			{
+				Graph[i].push_back(std::make_pair(0,0));
+				Graph[i][j].second = G(i, j);
+				Graph[i][j].first = j;
+			}
+		}
+	}
+	void Dijkstra(int start)   //при ручном задании графа
+	{
+		std::vector<int> d(numVert, INT_MAX), p(numVert);
+		d[start] = 0;
+		std::priority_queue< std::pair <int, int> > q;
+		q.push(std::make_pair(0, start));
+		while (!q.empty())
+		{
+			int v = q.top().second, cur_d = -q.top().first;
+			q.pop();
+			if (cur_d > d[v]) continue;
+			for (size_t j = 0; j < Graph[v].size(); ++j)
+			{
+				int to = Graph[v][j].first, len = Graph[v][j].second;
+				if (d[v] + len < d[to])
+				{
+					d[to] = d[v] + len;
+					p[to] = v;
+					q.push(std::make_pair(-d[to], to));
+				}
+			}
+		}
+		for (int i = 0; i < NUMVERTEX; i++)
+		{
+			if (d[i] != INT_MAX)
+			{
+				std::cout << "distance from " << start << " to " << i << " :" << d[i];
+				std::cout << std::endl;
+			}
+			else
+			{
+				std::cout << "form " << start << " to " << i << " no way";
+				std::cout << std::endl;
+			}
+		}
+	}
+	void printPair()
+	{
+		std::cout << std::endl;
+		std::cout << "pairType matrix:" << std::endl << std::endl;
+		for (int i = 0; i < numVert; i++)
+		{
+			for (int j = 0; j < numVert; j++)
+			{
+				std::cout << "(" << Graph[i][j].first << "," << Graph[i][j].second << ") ";
+			}
+			std::cout << std::endl;
 		}
 	}
 };

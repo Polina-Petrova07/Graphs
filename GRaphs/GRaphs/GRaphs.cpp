@@ -334,16 +334,20 @@ int main()
 	std::cout << std::endl;*/
 
 	//srand(time(NULL));
-	matrixType G;
+	matrixType G(4);
 	G.printMatrix();
-	std::cout << std::endl;
-	std::cout << std::endl;
 	NUMVERTEX = G.getNumVert(); //!!!
 	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
 	G.Dijkstra(start);
-	
+	std::cout << std::endl;
+	std::cout << std::endl;
+	pairTipe Gp(G);
+	Gp.printPair();
+	std::cout << std::endl;
+	std::cout << std::endl;
+	Gp.Dijkstra(start);
 	return 0;
 }
 
