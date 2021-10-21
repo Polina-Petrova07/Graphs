@@ -151,7 +151,7 @@ public:
 	}
 	int generateW()
 	{
-		return (rand()%10);
+		return (rand()%100+1);
 	}
 	void generateG()
 	{
