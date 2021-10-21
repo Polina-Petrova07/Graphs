@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <queue>
+#include <cstdlib>
 
 int NUMVERTEX;
 std::vector < std::vector<int> > Graph;
@@ -46,7 +47,7 @@ void Dfs(int start)
 	std::cout << start << " ";
 	usedd[start] = true;
 	for (int i = 0; i < NUMVERTEX; i++)
-		if (!usedd[i] && ((Graph[start][i] != 0)||(Graph[start][i] != -1)))
+		if (!usedd[i] && ((Graph[start][i] != 0) || (Graph[start][i] != -1)))
 			Dfs(i);
 }
 
@@ -56,7 +57,7 @@ private:
 	std::vector< std::vector<int> > Graph;
 	int* color;
 public:
-	matrixType()
+	/*matrixType()
 	{
 		std::cout << "enter number of vertix " << std::endl;
 		std::cin >> this->numVert;
@@ -96,7 +97,25 @@ public:
 				Graph[j][i] = Graph[i][j];
 			}
 		}
+	}*/
+	matrixType()
+	{
+		int n;
+		std::cout << "enter n " << std::endl;
+		std::cin >> n;
+		this->numVert = n;
+		color = new int[numVert];
+		for (int i = 0; i < numVert; i++)
+		{
+			Graph.push_back(std::vector <int>());
+				for (int j = 0; j < numVert; j++)
+				{
+					Graph[i].push_back(0);
+					Graph[i][j] = 0;
+				}
+		}
 	}
+
 	matrixType(int numVert)
 	{
 		std::cout << "if the graph is weight-bearing, for a nonexistent edge, put -1 " << std::endl;
@@ -124,6 +143,61 @@ public:
 		for (int i = 0; i < numVert; i++)
 		{
 			color[i] = 0;
+		}
+	}
+	void addRib(int i, int j, int w)
+	{
+		Graph[i][j] = w;
+	}
+	int generateW()
+	{
+		return (rand()%10);
+	}
+	void generateG()
+	{
+		//this->numVert = 3 * this->numVert + 3;
+		int memN = this->numVert;
+		int n = this->numVert * 3 + 3;
+		this->numVert = n;
+		Graph = std::vector<std::vector<int> >(n, std::vector<int>(n));
+		//Graph.push_back(std::vector <int>());
+		for (int i = 0; i < n; i++)
+		{
+			Graph.push_back(std::vector <int>());
+			for (int j = 0; j < numVert; j++)
+			{
+				Graph[i].push_back(0);
+				Graph[i][j] = generateW();
+			}
+		}
+		for (int i = 0; i < memN; i++)
+		{
+			Graph.push_back(std::vector <int>());
+			for (int j = 0; j < numVert; j++)
+			{
+				Graph[i].push_back(i);
+				Graph[i][j] = generateW();
+			}
+		}
+		for (int i = memN+2; i < n; i++)
+		{
+			Graph.push_back(std::vector <int>());
+			for (int j = 0; j < numVert; j++)
+			{
+				Graph[i].push_back(i);
+				Graph[i][j] = generateW();
+			}
+		}
+		for (int i = n - 1; i >= 0; i--)
+		{
+			Graph.push_back(std::vector<int>());
+			for (int j = n - 1; j >= 0; j--)
+			{
+				if (i == j)
+					Graph[i][j] = 0;
+				else
+				    Graph[j][i] = Graph[i][j];
+			}
 		}
 	}
 	int getNumVert()
@@ -206,43 +280,6 @@ public:
 		}
 		//return dist;
 	}
-	void DijekstraQ(int start)   //работает только если все веса меньше количества вершин (ошибка в строке 193)
-	{
-		std::vector<int> d(this->numVert, INT_MAX), p(this->numVert);
-		d[start] = 0;
-		std::priority_queue<std::pair<int, int> > q;
-		q.push(std::make_pair(0, start));
-		while (!q.empty())
-		{
-			int v = q.top().second, cur_d = -q.top().first;
-			q.pop();
-			if (cur_d > d[v]) continue;
-
-			for (size_t j = 0; j < Graph[v].size(); ++j)
-			{
-				int to = Graph[v][j], len = v;
-				if (d[v] + len < d[to])
-				{
-					d[to] = d[v] + len;
-					p[to] = v;
-					q.push(std::make_pair(-d[to], to));
-				}
-			}
-		}
-		for (int i = 0; i < NUMVERTEX; i++)
-		{
-			if (d[i] != INT_MAX)
-			{
-				std::cout << "distance from " << start << " to " << i << " :" << d[i];
-				std::cout << std::endl;
-			}
-			else
-			{
-				std::cout << "form " << start << " to " << i << " no way";
-				std::cout << std::endl;
-			}
-		}
-	}
 	int& operator ()(int i, int j)
 	{
 		return Graph[i][j];
@@ -309,7 +346,7 @@ public:
 				}
 			}
 		}
-		for (int i = 0; i < NUMVERTEX; i++)
+		for (int i = 0; i < this->numVert; i++)
 		{
 			if (d[i] != INT_MAX)
 			{

@@ -334,7 +334,8 @@ int main()
 	std::cout << std::endl;*/
 
 	//srand(time(NULL));
-	matrixType G(4);
+
+	/*matrixType G(4);   // 20/10
 	G.printMatrix();
 	NUMVERTEX = G.getNumVert(); //!!!
 	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
@@ -347,7 +348,17 @@ int main()
 	Gp.printPair();
 	std::cout << std::endl;
 	std::cout << std::endl;
+	Gp.Dijkstra(start);*/
+	matrixType G;
+	NUMVERTEX = G.getNumVert(); //!!!
+	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	G.generateG();
+	pairTipe Gp(G);
 	Gp.Dijkstra(start);
+
+	
 	return 0;
 }
 
