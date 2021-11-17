@@ -387,6 +387,7 @@ TEST(matrixType, right_searchloop_1)
 	}
 	EXPECT_EQ(f, true);
 }
+/*/
 TEST(matrixType, right_Dijkstra_0)
 {
 	std::vector< std::vector<int> > Graph;
@@ -459,6 +460,6 @@ TEST(matrixType, right_Dijkstra_2)
 	mas1 = G.Dijkstra(3);
 	EXPECT_EQ(mas1[0],5);
 }
-
+*/
 
 

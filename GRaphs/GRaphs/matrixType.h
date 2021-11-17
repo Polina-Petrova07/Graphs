@@ -200,6 +200,39 @@ public:
 			}
 		}
 	}
+	void BFSMTgraf(int start)
+	{
+		std::queue <int> queue;
+		queue.push(start);
+		std::vector<int> dist(this->numVert);
+		std::vector<int> par(this->numVert);
+		std::vector<bool> used(this->numVert);
+		used[start] = true;
+		par[start] = -1;
+		while (!queue.empty())
+		{
+			int vertex = queue.front();
+			for (int i = 0; i < this->Graph[vertex].size(); ++i)
+			{
+				if (!used[i] && this->Graph[vertex][i] != -1)
+				{
+					used[i] = true;
+					queue.push(i);
+					dist[i] = dist[vertex] + 1;
+					par[i] = vertex;
+				}
+			}
+			queue.pop();
+		}
+		std::cout << "distance: ";
+		for (int i = 0; i < dist.size(); i++)
+			std::cout << dist[i] << " ";
+		std::cout << std::endl;
+		std::cout << "parents: ";
+		for (int i = 0; i < par.size(); i++)
+			std::cout << par[i] << " ";
+		std::cout << std::endl;
+	}
 	int getNumVert()
 	{
 		return numVert;
@@ -265,7 +298,7 @@ public:
 			}
 			used[min] = 1;
 		}
-		for (int i = 0; i < NUMVERTEX; i++)
+		for (int i = 0; i < this->numVert; i++)
 		{
 			if (dist[i] != INT_MAX)
 			{
