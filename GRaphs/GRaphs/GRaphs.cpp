@@ -358,11 +358,11 @@ int main()
 	pairTipe Gp(G);
 	Gp.printPair();
 	Gp.Dijkstra(start);*/
-	matrixType G(4);
+	matrixType G(5);
 	G.printMatrix();
-	G.BFSMTgraf(start);
+	std::cout << std::endl << std::endl;
+	G.BFS_bottom_up(start);
 
-	G.Dijkstra(start);
 	
 	return 0;
 }

@@ -200,6 +200,37 @@ public:
 			}
 		}
 	}
+	void BFS_bottom_up(int start)
+	{
+		std::vector<int> par(this->numVert, -1);
+		par[start] = start;
+		std::queue<int> queue;
+		std::vector<int> masAns(this->numVert);
+		queue.push(start);
+		while (!queue.empty())
+		{
+			int vertex = queue.front();
+			queue.pop();
+			for (int i = 0; i < this->Graph[vertex].size(); ++i)
+			{
+				if (par[i]==-1 && this->Graph[vertex][i] != -1)
+				{
+					queue.push(i);
+					masAns[i] = masAns[vertex] + 1;
+					par[i] = vertex;
+				}
+			}
+		}
+		std::cout << "distance: ";
+		for (int i = 0; i < masAns.size(); i++)
+			std::cout << masAns[i] << " ";
+		std::cout << std::endl;
+		std::cout << "parents: ";
+		for (int i = 0; i < par.size(); i++)
+			std::cout << par[i] << " ";
+		std::cout << std::endl;
+
+	}
 	void BFSMTgraf(int start)
 	{
 		std::queue <int> queue;
