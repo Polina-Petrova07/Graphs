@@ -200,12 +200,25 @@ public:
 			}
 		}
 	}
+	//функция с соседями возвращет вектор соседей для одной вершины, далее ее в цикле вызывать для каждеой получается, 
+	//по этому вектору идти для каждой вершины и смотреть на ее par? если он -1, то присваиватm номер вершины
+	std::vector<int> get_neighbords(int vertex)
+	{
+		std::vector<int> neighbords(numVert, 0);
+		for (int i = 0; i < this->numVert; i++)
+		{
+			if (this->Graph[vertex][i] != -1)
+				neighbords[i] = 1;
+		}
+		return neighbords;
+	}
 	void BFS_bottom_up(int start)
 	{
 		std::vector<int> par(this->numVert, -1);
 		par[start] = start;
 		std::queue<int> queue;
 		std::vector<int> masAns(this->numVert);
+		std::vector<int> neirdbods(this->numVert);
 		queue.push(start);
 		while (!queue.empty())
 		{
@@ -213,17 +226,23 @@ public:
 			queue.pop();
 			for (int i = 0; i < this->Graph[vertex].size(); ++i)
 			{
-				if (par[i]==-1 && this->Graph[vertex][i] != -1)
+				/*if (par[i] == -1 && this->Graph[vertex][i] != -1)
 				{
 					queue.push(i);
 					masAns[i] = masAns[vertex] + 1;
 					par[i] = vertex;
-				}
+				}*/
+
+				neirdbods = get_neighbords(vertex);
+				if (par[i] == -1)
+					for (int j = 0; j < neirdbods.size(); j++)
+						if (neirdbods[j] == 1)
+							par[j] == vertex;
 			}
 		}
-		std::cout << "distance: ";
-		for (int i = 0; i < masAns.size(); i++)
-			std::cout << masAns[i] << " ";
+		//std::cout << "distance: ";
+		//for (int i = 0; i < masAns.size(); i++)
+			//std::cout << masAns[i] << " ";
 		std::cout << std::endl;
 		std::cout << "parents: ";
 		for (int i = 0; i < par.size(); i++)

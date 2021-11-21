@@ -301,7 +301,7 @@ int main()
 		}
 	}
 #endif
-	int start = 0;
+	int start = 3;
 
 	/*bool f;
 	f = false;
@@ -358,7 +358,8 @@ int main()
 	pairTipe Gp(G);
 	Gp.printPair();
 	Gp.Dijkstra(start);*/
-	matrixType G(5);
+	std::vector<int> n;
+	matrixType G(4);
 	G.printMatrix();
 	std::cout << std::endl << std::endl;
 	G.BFS_bottom_up(start);
