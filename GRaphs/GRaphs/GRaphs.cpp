@@ -1,5 +1,5 @@
 ﻿// GRaphs.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+// https://www.cplusplus.com/reference/chrono/high_resolution_clock/now/
 
 #define INPUT = true
 //#undef INPUT
@@ -266,75 +266,7 @@ int mas[NUMVERTEX][NUMVERTEX] = {
 
 int main()
 {
-#if defined (INPUT)   //make graph
-
-	/*int num;
-	std::cout << "enter the number of vertices" << std::endl;
-	std::cin >> num;
-	matrixType G(num);
-	G.printMatrix();
-	std::cout << std::endl;
-	NUMVERTEX = G.getNumVert();
-	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
-	std::vector<bool> used_dfs(NUMVERTEX);
-	usedd = used_dfs;
-
-	for (int i = 0; i < NUMVERTEX; i++)
-	{
-		Graph.push_back(std::vector <int>());
-		for (int j = 0; j < NUMVERTEX; j++)
-		{
-			Graph[i].push_back(0);
-			Graph[i][j] = G(i, j);
-		}
-	}
-	std::cout << std::endl;*/
-	
-#else
-	for (int i = 0; i < NUMVERTEX; i++)
-	{
-		Graph.push_back(std::vector <int>());
-		for (int j = 0; j < NUMVERTEX; j++)
-		{
-			Graph[i].push_back(0);
-			Graph[i][j] = mas[i][j];
-		}
-	}
-#endif
-	int start = 3;
-
-	/*bool f;
-	f = false;
-	int* mas;
-	mas = G.getMasColor();
-
-	for (int i = 0; i < num; i++)
-	{
-		if (mas[i] == 0)
-		  f= G.loopSearch(i,f);
-	}
-	if (f == true)
-		std::cout << "yea" << std::endl;
-	else
-		std::cout << "no" << std::endl;
-	
-	std::cout << std::endl;
-	std::cout << std::endl;
-
-	Bfs(start);
-	std::cout << std::endl;
-	std::cout << std::endl;
-	Dfs(start);
-	std::cout << std::endl;
-	std::cout << std::endl;
-	int n = 0, k;
-	k = G.NComp(n);
-	std::cout <<"Ncomp"<< k;
-	std::cout << std::endl;
-	std::cout << std::endl;*/
-
-	//srand(time(NULL));
-	// NUMVERTEX = G.getNumVert(); //!!!
+	int start = 0;
 	/*matrixType G(4);   // 20/10
 	G.printMatrix();
 	NUMVERTEX = G.getNumVert(); //!!!
@@ -349,22 +281,53 @@ int main()
 	std::cout << std::endl;
 	std::cout << std::endl;
 	Gp.Dijkstra(start);*/
-	/*matrixType G;
-	NUMVERTEX = G.getNumVert(); //!!!
-	std::cout << "NUMVERTEX: " << NUMVERTEX << std::endl;
+	std::cout << "==========" << "first check" << "==========" << std::endl;
+	std::vector< std::vector <int>> v {
+		{0,1,1,0},
+		{1,0,1,1},
+		{1,1,0,1},
+		{0,1,1,0}
+	};
+	matrixType g(v,4);
+	g.printMatrix();
+	std::cout << std::endl << "standart BFS:" << std::endl;
+	g.BFSMTgraf(0);
 	std::cout << std::endl;
-	std::cout << std::endl;
-	G.generateG();
-	pairTipe Gp(G);
-	Gp.printPair();
-	Gp.Dijkstra(start);*/
-	std::vector<int> n;
-	matrixType G(4);
-	G.printMatrix();
+	std::cout << std::endl << "bottom up BFS:" << std::endl;
+	g.BFS_bottom_up(start);
 	std::cout << std::endl << std::endl;
-	G.BFS_bottom_up(start);
-
-	
+	std::cout << "==========" << "second check" << "==========" << std::endl;
+	std::vector< std::vector <int>> v1 {
+		{0,1,1,1},
+		{1,0,1,0},
+		{1,1,0,1},
+		{1,1,1,0}
+	};
+	matrixType g1(v1, 4);
+	g1.printMatrix();
+	std::cout << std::endl << "standart BFS:" << std::endl;
+	g1.BFSMTgraf(0);
+	std::cout << std::endl;
+	std::cout << std::endl << "bottom up BFS:" << std::endl;
+	g1.BFS_bottom_up(start);
+	std::cout << std::endl << std::endl;
+	std::cout << "==========" << "third check" << "==========" << std::endl;
+	std::vector< std::vector <int>> v2{
+		{0,1,0,0,0},
+		{1,0,1,1,0},
+		{0,1,0,0,0},
+		{0,1,0,0,1},
+		{0,0,0,1,0}
+	};
+	matrixType g2(v2, 5);
+	g2.printMatrix();
+	std::cout << std::endl << "standart BFS:" << std::endl;
+	g2.BFSMTgraf(0);
+	std::cout << std::endl;
+	std::cout << std::endl << "bottom up BFS:" << std::endl;
+	g2.BFS_bottom_up(start);
+	crsType G;
+	G.print();
 	return 0;
 }
 

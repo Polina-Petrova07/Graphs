@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <queue>
+#include <set>
 #include <cstdlib>
 
 int NUMVERTEX;
@@ -200,8 +201,6 @@ public:
 			}
 		}
 	}
-	//функция с соседями возвращет вектор соседей для одной вершины, далее ее в цикле вызывать для каждеой получается, 
-	//по этому вектору идти для каждой вершины и смотреть на ее par? если он -1, то присваиватm номер вершины
 	std::vector<int> get_neighbords(int vertex)
 	{
 		std::vector<int> neighbords(numVert, 0);
@@ -214,35 +213,35 @@ public:
 	}
 	void BFS_bottom_up(int start)
 	{
+		std::set<int> inFrontier, next;
 		std::vector<int> par(this->numVert, -1);
+		std::vector<int> dist(this->numVert,-1);
 		par[start] = start;
-		std::queue<int> queue;
-		std::vector<int> masAns(this->numVert);
-		std::vector<int> neirdbods(this->numVert);
-		queue.push(start);
-		while (!queue.empty())
+		dist[start] = 0;
+		inFrontier.insert(start);
+		while (!inFrontier.empty())
 		{
-			int vertex = queue.front();
-			queue.pop();
-			for (int i = 0; i < this->Graph[vertex].size(); ++i)
+			for (size_t i = 0; i < this->numVert; ++i)
 			{
-				/*if (par[i] == -1 && this->Graph[vertex][i] != -1)
-				{
-					queue.push(i);
-					masAns[i] = masAns[vertex] + 1;
-					par[i] = vertex;
-				}*/
-
-				neirdbods = get_neighbords(vertex);
 				if (par[i] == -1)
-					for (int j = 0; j < neirdbods.size(); j++)
-						if (neirdbods[j] == 1)
-							par[j] == vertex;
+				{
+					for (size_t j : this->Graph[i])
+					{
+						if (inFrontier.find(j) != inFrontier.end())
+						{
+							next.insert(i);
+							par[i] = j;
+							dist[i] = dist[j] + 1;
+						}
+					}
+				}
 			}
+			inFrontier = next;
+			next.clear();
 		}
-		//std::cout << "distance: ";
-		//for (int i = 0; i < masAns.size(); i++)
-			//std::cout << masAns[i] << " ";
+		std::cout << "distance: ";
+		for (int i = 0; i < dist.size(); i++)
+			std::cout << dist[i] << " ";
 		std::cout << std::endl;
 		std::cout << "parents: ";
 		for (int i = 0; i < par.size(); i++)
@@ -264,7 +263,7 @@ public:
 			int vertex = queue.front();
 			for (int i = 0; i < this->Graph[vertex].size(); ++i)
 			{
-				if (!used[i] && this->Graph[vertex][i] != -1)
+				if (!used[i] && (this->Graph[vertex][i] != -1) && this->Graph[vertex][i] != 0)
 				{
 					used[i] = true;
 					queue.push(i);
@@ -366,6 +365,12 @@ public:
 	int& operator ()(int i, int j)
 	{
 		return Graph[i][j];
+	}
+	matrixType& operator= (const std::vector< std::vector<int> >& v)
+	{
+		this->Graph = v;
+		this -> numVert = v.size();
+		return *this;
 	}
 	void printMatrix()
 	{

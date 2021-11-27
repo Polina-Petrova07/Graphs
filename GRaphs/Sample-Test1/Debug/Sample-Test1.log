@@ -1,8 +1,14 @@
 ﻿  test.cpp
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(22,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(35,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(39,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(110,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(24,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(37,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(41,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(224,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(243,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(247,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(264,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(277,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(281,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(297,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(41,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(47,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\Sample-Test1\test.cpp(30,2): warning C4003: недостаточно аргументов для вызова макроса, подобного функции, "EXPECT_NO_THROW"
