@@ -281,6 +281,8 @@ int main()
 	std::cout << std::endl;
 	std::cout << std::endl;
 	Gp.Dijkstra(start);*/
+
+	/*
 	std::cout << "==========" << "first check" << "==========" << std::endl;
 	std::vector< std::vector <int>> v {
 		{0,1,1,0},
@@ -326,8 +328,30 @@ int main()
 	std::cout << std::endl;
 	std::cout << std::endl << "bottom up BFS:" << std::endl;
 	g2.BFS_bottom_up(start);
-	crsType G;
-	G.print();
+	std::cout << std::endl << std::endl;
+	std::vector< std::vector <int>> v3{
+		{0,1,1,1},
+		{1,0,0,1},
+		{1,0,0,1},
+		{1,1,1,0}
+	};
+	matrixType g3(v3, 4);
+	pairTipe GG(g3);
+	GG.printPair();*/
+
+	std::vector< std::vector <int>> v{
+		{0,1,1,0},
+		{1,0,1,1},
+		{1,1,0,1},
+		{0,1,1,0}
+	};
+	matrixType g(v, 4);
+	g.printMatrix();
+
+	g.BFSMTgraf(start);
+	std::cout << std::endl;
+	std::cout << "DFS: ";
+	g.DfsMTgraf(start);
 	return 0;
 }
 

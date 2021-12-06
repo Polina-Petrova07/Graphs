@@ -7,7 +7,7 @@
 
 int NUMVERTEX;
 std::vector < std::vector<int> > Graph;
-std::vector<bool> usedd(NUMVERTEX);
+//std::vector<bool> usedd(NUMVERTEX);
 
 void Bfs(int start)
 {
@@ -42,7 +42,7 @@ void Bfs(int start)
 		std::cout << par[i] << " ";
 	std::cout << std::endl;
 }
-
+/*
 void Dfs(int start)
 {
 	std::cout << start << " ";
@@ -50,7 +50,7 @@ void Dfs(int start)
 	for (int i = 0; i < NUMVERTEX; i++)
 		if (!usedd[i] && ((Graph[start][i] != 0) || (Graph[start][i] != -1)))
 			Dfs(i);
-}
+}*/
 
 class matrixType {
 private:
@@ -99,6 +99,17 @@ public:
 			}
 		}
 	}*/
+
+	int getNumVert()
+	{
+		return numVert;
+	}
+	int* getMasColor()
+	{
+		return color;
+	}
+	std::vector<bool> used;
+	//used.resize(this->numVert);
 	matrixType()
 	{
 		int n;
@@ -225,9 +236,9 @@ public:
 			{
 				if (par[i] == -1)
 				{
-					for (size_t j : this->Graph[i])
+					for (int j=0; j < this->numVert; ++j)
 					{
-						if (inFrontier.find(j) != inFrontier.end())
+						if (this->Graph[i][j] && inFrontier.find(j) != inFrontier.end())
 						{
 							next.insert(i);
 							par[i] = j;
@@ -282,13 +293,20 @@ public:
 			std::cout << par[i] << " ";
 		std::cout << std::endl;
 	}
-	int getNumVert()
+	int f = 5;
+	void DfsMTgraf(int start)
 	{
-		return numVert;
-	}
-	int* getMasColor()
-	{
-		return color;
+		if (f == 5)  //  костыль
+		{
+			for (int i = 0; i < this->numVert; i++)
+				used.push_back(false);
+			f == 0;
+		}
+		std::cout << start << " ";
+		used[start] = true;
+		for (int i = 0; i < this->numVert; i++)
+			if (!used[i] && ((Graph[start][i] != 0) || (Graph[start][i] != -1)))
+				DfsMTgraf(i);
 	}
 	bool loopSearch(int start, bool f)
 	{
@@ -305,15 +323,22 @@ public:
 		color[start] = 2;
 		return f;
 	}
+	int ff = 5;
 	int NComp(int n)
 	{
+		if (ff == 5)  //  костыль
+		{
+			for (int i = 0; i < this->numVert; i++)
+				used.push_back(false);
+			ff == 0;
+		}
 		n = 0;
 		for (int i = 0; i < numVert; i++)
 		{
-			if (!usedd[i])
+			if (!used[i])
 			{
 				++n;
-				Dfs(i);
+				DfsMTgraf(i);
 			}
 		}
 		return n;
