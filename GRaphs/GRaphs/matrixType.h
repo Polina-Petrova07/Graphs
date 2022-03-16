@@ -4,6 +4,7 @@
 #include <queue>
 #include <set>
 #include <cstdlib>
+//#include <bits/stdc++.h>
 
 int NUMVERTEX;
 std::vector < std::vector<int> > Graph;
@@ -167,6 +168,7 @@ public:
 	}
 	void generateG()
 	{
+		//std::cout << "i generate" << std::endl;
 		//this->numVert = 3 * this->numVert + 3;
 		int memN = this->numVert;
 		int n = this->numVert * 3 + 3;
@@ -224,6 +226,7 @@ public:
 	}
 	void BFS_bottom_up(int start)
 	{
+		//this->numVert = this->numVert * 3;  // !
 		std::set<int> inFrontier, next;
 		std::vector<int> par(this->numVert, -1);
 		std::vector<int> dist(this->numVert,-1);
@@ -250,23 +253,67 @@ public:
 			inFrontier = next;
 			next.clear();
 		}
-		std::cout << "distance: ";
+		/*std::cout << "distance: ";
 		for (int i = 0; i < dist.size(); i++)
 			std::cout << dist[i] << " ";
 		std::cout << std::endl;
 		std::cout << "parents: ";
 		for (int i = 0; i < par.size(); i++)
 			std::cout << par[i] << " ";
-		std::cout << std::endl;
+		std::cout << std::endl;*/
 
+	}
+	void BFSHibrid(int start)
+	{
+		int f = this->numVert / 2;
+		int iter = 0;
+		std::set<int> inFrontier, next;
+		std::vector<int> par(this->numVert, -1);
+		std::vector<int> dist(this->numVert, -1);
+		std::queue <int> queue;
+		par[start] = start;
+		dist[start] = 0;
+		inFrontier.insert(start);
+		while (!inFrontier.empty())
+		{
+			if (iter > f)
+			{
+				queue.pop();
+				for (size_t i = 0; i < this->numVert; ++i)
+				{
+					if (par[i] == -1)
+					{
+						for (int j = 0; j < this->numVert; ++j)
+						{
+							if (this->Graph[i][j] && inFrontier.find(j) != inFrontier.end())
+							{
+								next.insert(i);
+								par[i] = j;
+								dist[i] = dist[j] + 1;
+								queue.push (Graph[i][j]);
+							}
+						}
+					}
+				}
+				iter++;
+				inFrontier = next;
+				next.clear();
+			}
+			else if (iter <= f)
+			{
+
+			}
+				
+		}
 	}
 	void BFSMTgraf(int start)
 	{
+		this->numVert = this->numVert * 3;  // !
 		std::queue <int> queue;
 		queue.push(start);
 		std::vector<int> dist(this->numVert);
 		std::vector<int> par(this->numVert);
-		std::vector<bool> used(this->numVert);
+		std::vector<bool> used(this->numVert+1);
 		used[start] = true;
 		par[start] = -1;
 		while (!queue.empty())
@@ -274,7 +321,7 @@ public:
 			int vertex = queue.front();
 			for (int i = 0; i < this->Graph[vertex].size(); ++i)
 			{
-				if (!used[i] && (this->Graph[vertex][i] != -1) && this->Graph[vertex][i] != 0)
+				if (!used[i] && this->Graph[vertex][i])// (this->Graph[vertex][i] != -1) && this->Graph[vertex][i] != 0)
 				{
 					used[i] = true;
 					queue.push(i);
@@ -284,6 +331,7 @@ public:
 			}
 			queue.pop();
 		}
+		/*
 		std::cout << "distance: ";
 		for (int i = 0; i < dist.size(); i++)
 			std::cout << dist[i] << " ";
@@ -291,7 +339,7 @@ public:
 		std::cout << "parents: ";
 		for (int i = 0; i < par.size(); i++)
 			std::cout << par[i] << " ";
-		std::cout << std::endl;
+		std::cout << std::endl;*/
 	}
 	int f = 5;
 	void DfsMTgraf(int start)
@@ -472,6 +520,35 @@ public:
 				std::cout << std::endl;
 			}
 		}
+	}
+	void Prima(int start)
+	{
+		const int INF = 1e9 + 7;
+		std::vector<bool> used(this->numVert + 1);
+		int mst_weight = 0;
+		std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> q;
+		q.push({ 0, 0 });
+		while (!q.empty()) {
+			std::pair<int, int> c = q.top();
+			q.pop();
+			int dst = c.first, v = c.second;
+			if (used[v])
+			{
+				continue;
+			}
+			used[v] = true;
+			mst_weight += dst;
+			for (std::pair<int,int> e: this->Graph[v])
+			{
+				int u = e.first;
+				int len_vu = e.second;
+				if (!used[u])
+				{
+					q.push({ len_vu,u });
+				}
+			}
+		}
+		std::cout << "Minimum spanning tree wight: " << mst_weight << std::endl;
 	}
 	void printPair()
 	{

@@ -339,19 +339,20 @@ int main()
 	pairTipe GG(g3);
 	GG.printPair();*/
 
-	std::vector< std::vector <int>> v{
-		{0,1,1,0},
-		{1,0,1,1},
-		{1,1,0,1},
-		{0,1,1,0}
-	};
-	matrixType g(v, 4);
-	g.printMatrix();
-
-	g.BFSMTgraf(start);
+	matrixType G;
 	std::cout << std::endl;
-	std::cout << "DFS: ";
-	g.DfsMTgraf(start);
+	G.generateG();
+	double t1, t2, t3, t4;
+	t1 = clock();
+	G.BFS_bottom_up(start);
+	t2 = clock();
+	std::cout << std::endl;
+	std::cout <<"bottom up BFS time: "<< (t2 - t1)/1000<<" sec" << std::endl;
+	t3 = clock();
+	G.BFSMTgraf(start);
+	t4 = clock();
+	std::cout << std::endl;
+	std::cout << "BFS standart  time: " << (t4 - t3) / 1000 << " sec" << std::endl;
 	return 0;
 }
 

@@ -2,14 +2,12 @@
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(24,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(37,20): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(41,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(235,25): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(254,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(258,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(275,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(288,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(292,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(303,6): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(315,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(237,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(281,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(321,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(350,6): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(362,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(380,7): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(41,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(47,21): warning C4018: <: несоответствие типов со знаком и без знака
   GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\Debug\GRaphs.exe
