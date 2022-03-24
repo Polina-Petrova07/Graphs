@@ -4,6 +4,7 @@
 #include <queue>
 #include <set>
 #include <cstdlib>
+#include <random>
 //#include <bits/stdc++.h>
 
 int NUMVERTEX;
@@ -471,6 +472,45 @@ private:
 	std::vector< std::vector <std::pair <int, int> > > Graph;
 	int numVert;
 public:
+	int GenerateRandomWeight()
+	{
+		int k;
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(1, 100);
+		k = dist(gen);
+		return k;
+	}
+	pairTipe(int n)
+	{
+		this->numVert = n;
+		for (int i = 0; i < numVert; i++)
+		{
+			Graph.push_back(std::vector< std::pair<int, int> >());
+			for (int j = 0; j < numVert; j++)
+			{
+				Graph[i].push_back(std::make_pair(0, 0));
+				if (i == j) 
+				{
+					Graph[i][j].first = j;
+					Graph[i][j].second = 0;
+				}
+				else
+				{
+					Graph[i][j].first = j;
+					Graph[i][j].second = GenerateRandomWeight();
+				}
+				
+			}
+		}
+		for (int i = 0; i < numVert; i++)
+		{
+			for (int j = 0; j < numVert; j++)
+			{
+				Graph[i][j].second = Graph[j][i].second;
+			}
+		}
+	}
 	pairTipe(matrixType G)
 	{
 		this->numVert = G.getNumVert();

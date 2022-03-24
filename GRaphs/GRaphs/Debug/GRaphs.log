@@ -1,13 +1,14 @@
 ﻿  GRaphs.cpp
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(24,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(37,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(41,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(237,25): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(281,26): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(321,22): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(350,6): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(362,21): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(380,7): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(26,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(39,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(43,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(239,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(283,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(323,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(352,6): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(364,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(382,7): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(566,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(41,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(47,21): warning C4018: <: несоответствие типов со знаком и без знака
   GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\Debug\GRaphs.exe

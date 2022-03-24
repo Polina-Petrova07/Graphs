@@ -339,20 +339,26 @@ int main()
 	pairTipe GG(g3);
 	GG.printPair();*/
 
-	matrixType G;
-	std::cout << std::endl;
-	G.generateG();
-	double t1, t2, t3, t4;
-	t1 = clock();
-	G.BFS_bottom_up(start);
-	t2 = clock();
-	std::cout << std::endl;
-	std::cout <<"bottom up BFS time: "<< (t2 - t1)/1000<<" sec" << std::endl;
-	t3 = clock();
-	G.BFSMTgraf(start);
-	t4 = clock();
-	std::cout << std::endl;
-	std::cout << "BFS standart  time: " << (t4 - t3) / 1000 << " sec" << std::endl;
+	//matrixType G;
+	//std::cout << std::endl;
+	//G.generateG();
+	//double t1, t2, t3, t4;
+	//t1 = clock();
+	//G.BFS_bottom_up(start);
+	//t2 = clock();
+	//std::cout << std::endl;
+	//std::cout <<"bottom up BFS time: "<< (t2 - t1)/1000<<" sec" << std::endl;
+	//t3 = clock();
+	//G.BFSMTgraf(start);
+	//t4 = clock();
+	//std::cout << std::endl;
+	//std::cout << "BFS standart  time: " << (t4 - t3) / 1000 << " sec" << std::endl;
+
+	pairTipe G(5);
+	G.printPair();
+	std::cout << std::endl << std::endl;
+	G.Prima(0);
+
 	return 0;
 }
 
