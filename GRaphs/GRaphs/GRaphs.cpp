@@ -354,11 +354,22 @@ int main()
 	//std::cout << std::endl;
 	//std::cout << "BFS standart  time: " << (t4 - t3) / 1000 << " sec" << std::endl;
 
-	pairTipe G(5);
+	pairTipe G(4);
 	G.printPair();
 	std::cout << std::endl << std::endl;
 	G.Prima(0);
-
+	std::cout << std::endl << std::endl;
+	std::vector< std::vector <std::pair <int, int> > > minOstov;
+	minOstov = G.GetminOstov();
+	std::cout << "minOstov:" << std::endl << std::endl;
+	for (int i = 0; i < G.getNumVert(); i++)
+	{
+		for (int j = 0; j < G.getNumVert(); j++)
+		{
+			std::cout << "(" << minOstov[i][j].first << "," << minOstov[i][j].second << ") ";
+		}
+		std::cout << std::endl;
+	}
 	return 0;
 }
 

@@ -470,6 +470,7 @@ public:
 class pairTipe {
 private:
 	std::vector< std::vector <std::pair <int, int> > > Graph;
+	std::vector< std::vector <std::pair <int, int> > > minOstov;
 	int numVert;
 public:
 	int GenerateRandomWeight()
@@ -525,6 +526,10 @@ public:
 			}
 		}
 	}
+	int getNumVert()
+	{
+		return (this->numVert);
+	}
 	void Dijkstra(int start)   //при ручном задании графа
 	{
 		std::vector<int> d(numVert, INT_MAX), p(numVert);
@@ -561,13 +566,26 @@ public:
 			}
 		}
 	}
-	void Prima(int start)
+	void Prima(int start) 
 	{
+		for (int i = 0; i < numVert; i++)
+		{
+			minOstov.push_back(std::vector< std::pair<int, int> >());
+			for (int j = 0; j < numVert; j++)
+			{
+				minOstov[i].push_back(std::make_pair(0, 0));
+				minOstov[i][j].first = j;
+				minOstov[i][j].second = 0;
+				
+			}
+		}
+		
 		const int INF = 1e9 + 7;
 		std::vector<bool> used(this->numVert + 1);
 		int mst_weight = 0;
 		std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> q;
 		q.push({ 0, 0 });
+		int line = 0;
 		while (!q.empty()) {
 			std::pair<int, int> c = q.top();
 			q.pop();
@@ -578,6 +596,8 @@ public:
 			}
 			used[v] = true;
 			mst_weight += dst;
+			this->minOstov[line][v].first = v;
+			this->minOstov[line][v].second = dst;
 			for (std::pair<int,int> e: this->Graph[v])
 			{
 				int u = e.first;
@@ -585,10 +605,38 @@ public:
 				if (!used[u])
 				{
 					q.push({ len_vu,u });
+					//  this->minOstov[v][u].first = u;
+					//  this->minOstov[v][u].second = len_vu;
+				}
+			}
+			line++;
+		}
+		std::cout << "Minimum spanning tree wight: " << mst_weight << std::endl;
+	}
+	std::vector< std::vector <std::pair <int, int> > > GetminOstov() // can only be called after function "Prima"
+	{
+		std::vector< std::vector <std::pair <int, int> > > returnOstov = this->minOstov;
+		return(returnOstov);
+	}
+	void clustering(std::vector< std::vector <std::pair <int, int> > > minOst, int n)
+	{
+		int DelEg = 0;
+		int maxEg = INT_MIN;
+		while (DelEg < n)
+		{
+			int line = 0;
+			for (std::pair<int, int> e : this->Graph[0])
+			{
+				int w = e.second;
+				if (w > maxEg)
+				{
+					maxEg = w;
+
+					//  continue
 				}
 			}
 		}
-		std::cout << "Minimum spanning tree wight: " << mst_weight << std::endl;
+
 	}
 	void printPair()
 	{
