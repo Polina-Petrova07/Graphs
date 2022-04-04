@@ -585,8 +585,10 @@ public:
 		int mst_weight = 0;
 		std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> q;
 		q.push({ 0, 0 });
-		int line = 0;
-		while (!q.empty()) {
+		int saveV = 0;
+		std::vector<std::pair<int, int>> minOst;
+		while (!q.empty()) 
+		{
 			std::pair<int, int> c = q.top();
 			q.pop();
 			int dst = c.first, v = c.second;
@@ -594,10 +596,11 @@ public:
 			{
 				continue;
 			}
+			//this->minOstov[line][chek].first = v;
+			//this->minOstov[v][pos].second = dst;
 			used[v] = true;
 			mst_weight += dst;
-			this->minOstov[line][v].first = v;
-			this->minOstov[line][v].second = dst;
+			minOst.push_back({ saveV,v });
 			for (std::pair<int,int> e: this->Graph[v])
 			{
 				int u = e.first;
@@ -605,36 +608,49 @@ public:
 				if (!used[u])
 				{
 					q.push({ len_vu,u });
-					//  this->minOstov[v][u].first = u;
-					//  this->minOstov[v][u].second = len_vu;
+					saveV = v;
 				}
 			}
-			line++;
 		}
 		std::cout << "Minimum spanning tree wight: " << mst_weight << std::endl;
+
+		std::cout << std::endl;
+		for (int i = 0; i < minOst.size(); i++)
+			std::cout << minOst[i].first << ";"<< minOst[i].second<<"  ";
 	}
-	std::vector< std::vector <std::pair <int, int> > > GetminOstov() // can only be called after function "Prima"
+	std::vector< std::vector <std::pair <int, int> > > GetminOstov()  // can only be called after function "Prima"
 	{
 		std::vector< std::vector <std::pair <int, int> > > returnOstov = this->minOstov;
 		return(returnOstov);
 	}
-	void clustering(std::vector< std::vector <std::pair <int, int> > > minOst, int n)
+	void clustering(int n)  // can only be called after function "Prima"
 	{
+		int numClasters = 0;
 		int DelEg = 0;
 		int maxEg = INT_MIN;
 		while (DelEg < n)
 		{
-			int line = 0;
-			for (std::pair<int, int> e : this->Graph[0])
+			int rememberI = 0;
+			int rememberJ = 0;
+			for (int i = 0; i < this->numVert; i++)
 			{
-				int w = e.second;
-				if (w > maxEg)
+				for (int j = 0; j < this->numVert; j++)
 				{
-					maxEg = w;
-
-					//  continue
+					int currentW = minOstov[i][j].second;
+					if (currentW > maxEg)
+					{
+						maxEg = currentW;
+						//  remeber this vertex
+						rememberI = i;
+						rememberJ = j;
+					}
 				}
 			}
+			//  delete this ege
+			minOstov[rememberI][rememberJ].first = rememberJ;
+			minOstov[rememberI][rememberJ].second = 0;
+			DelEg++;
+			numClasters++;
 		}
 
 	}
