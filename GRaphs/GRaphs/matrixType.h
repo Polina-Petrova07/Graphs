@@ -613,15 +613,21 @@ public:
 			}
 		}
 		std::cout << "Minimum spanning tree wight: " << mst_weight << std::endl;
+		for (int i = 0; i < minOst.size(); i++)
+		{
+			minOstov[minOst[i].first][minOst[i].second].second = this->Graph[minOst[i].first][minOst[i].second].second;
+		}
 
 		std::cout << std::endl;
 		for (int i = 0; i < minOst.size(); i++)
 			std::cout << minOst[i].first << ";"<< minOst[i].second<<"  ";
+		std::cout << std::endl << std::endl;
 	}
 	std::vector< std::vector <std::pair <int, int> > > GetminOstov()  // can only be called after function "Prima"
 	{
-		std::vector< std::vector <std::pair <int, int> > > returnOstov = this->minOstov;
-		return(returnOstov);
+		//std::vector< std::vector <std::pair <int, int> > > returnOstov = this->minOstov;
+		//return(returnOstov);
+		return this->minOstov;
 	}
 	void clustering(int n)  // can only be called after function "Prima"
 	{
