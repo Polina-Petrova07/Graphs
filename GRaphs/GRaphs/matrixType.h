@@ -473,6 +473,7 @@ private:
 	std::vector< std::vector <std::pair <int, int> > > minOstov;
 	int numVert;
 public:
+	std::vector<bool> used;
 	int GenerateRandomWeight()
 	{
 		int k;
@@ -625,41 +626,47 @@ public:
 	}
 	std::vector< std::vector <std::pair <int, int> > > GetminOstov()  // can only be called after function "Prima"
 	{
-		//std::vector< std::vector <std::pair <int, int> > > returnOstov = this->minOstov;
-		//return(returnOstov);
 		return this->minOstov;
 	}
-	void clustering(int n)  // can only be called after function "Prima"
-	{
-		int numClasters = 0;
-		int DelEg = 0;
-		int maxEg = INT_MIN;
-		while (DelEg < n)
-		{
-			int rememberI = 0;
-			int rememberJ = 0;
-			for (int i = 0; i < this->numVert; i++)
-			{
-				for (int j = 0; j < this->numVert; j++)
-				{
-					int currentW = minOstov[i][j].second;
-					if (currentW > maxEg)
-					{
-						maxEg = currentW;
-						//  remeber this vertex
-						rememberI = i;
-						rememberJ = j;
-					}
-				}
-			}
-			//  delete this ege
-			minOstov[rememberI][rememberJ].first = rememberJ;
-			minOstov[rememberI][rememberJ].second = 0;
-			DelEg++;
-			numClasters++;
-		}
 
+	void DFS(int start, int f)  // dfs for minOstov
+	{
+		if (f != 0)  //  crutch
+		{
+			for (int i = 0; i < this->minOstov.size(); i++)
+				used.push_back(false);
+			f = 0;  
+		}
+		used[start] = true;
+		for (int i = 0; i < this->minOstov[start].size(); i++)
+			if (!used[i] && (this->minOstov[start][i].second != 0))
+				DFS(i, f);
 	}
+	int numComponents(int n,int f) // for minOstov (in algoritm clustering)
+	{
+		if (f != 0)  // crutch
+		{
+			for (int i = 0; i < this->minOstov.size(); i++)
+				used.push_back(false);
+			f = 0;
+		}
+		n = 0;
+		for (int i = 0; i < this->minOstov.size(); i++)
+		{
+			if (!used[i])
+			{
+				++n;
+				DFS(i,f);
+			}
+		}
+		return n;
+	}
+	void createNewMinOstov(std::vector<std::vector<std::pair<int, int>>> newMinOstov)
+	{
+		this->minOstov = newMinOstov;
+	}
+	//  int ff = 5;
+
 	void printPair()
 	{
 		std::cout << std::endl;
@@ -674,4 +681,28 @@ public:
 		}
 	}
 };
+void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G
+{
+	int maxEg = INT_MIN;
+	std::vector<std::vector<std::pair<int, int>>> saveMinOstov = G.GetminOstov();
+	int currentComp = 0;
+	while (currentComp <= n)
+	{
+		int currentI = 0, currentJ = 0;
+		for (int i = 0; i < saveMinOstov.size(); i++)
+			for (int j = 0; j < saveMinOstov.size(); j++)
+			{
+				if (saveMinOstov[i][j].second > maxEg)
+				{
+					maxEg = saveMinOstov[i][j].second;
+					currentI = i;
+					currentJ = j;
+				}
+			}
+		saveMinOstov[currentI][currentJ].second = 0;  // delete max edge
+		G.createNewMinOstov(saveMinOstov);
+		currentComp = G.numComponents(0, 7);
+	}
+	std::cout << "I DO ALL, NUM CLASTERS = " << currentComp;
+}
 

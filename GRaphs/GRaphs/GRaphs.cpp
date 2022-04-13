@@ -354,7 +354,6 @@ int main()
 	//std::cout << std::endl;
 	//std::cout << "BFS standart  time: " << (t4 - t3) / 1000 << " sec" << std::endl;
 
-	
 	pairTipe G(4);
 	G.printPair();
 	std::cout << std::endl << std::endl;
@@ -371,25 +370,22 @@ int main()
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl << std::endl;
+	std::cout << "TEST CLUSTERING: " << std::endl << std::endl;
+	std::vector< std::vector <int>> v{
+		{0,1,0,0},
+		{1,0,0,0},
+		{0,0,0,1},
+		{0,0,1,0}
+	};
+	matrixType g(v, 4);
+	pairTipe GG(g);
+
+	GG.Prima(0);
+	clusteringg(GG, 2);
+
 	
 
-	/*std::vector<std::vector<int>> Graph;
-	for (int i = 0; i < 4; i++)
-	{
-		int n = 0;
-		Graph.push_back(std::vector <int>());
-		for (int j = 0; j < 4; j++)
-		{
-			Graph[i].push_back(0);
-			Graph[i][j] = n;
-			n++;
-		}
-		//n++;
-	}
-	for (int i : Graph[1])
-	{
-		std::cout << Graph[1][i] << " ";
-	}*/
 	return 0;
 }
 

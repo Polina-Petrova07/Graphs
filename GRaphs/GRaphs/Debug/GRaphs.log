@@ -8,8 +8,17 @@ C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(323,22): warning C4018: <: не�
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(352,6): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(364,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(382,7): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(583,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(622,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(584,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(617,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(623,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(636,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(641,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(649,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(654,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(716,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(717,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(753,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(754,22): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(41,21): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(47,21): warning C4018: <: несоответствие типов со знаком и без знака
   GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\Debug\GRaphs.exe
