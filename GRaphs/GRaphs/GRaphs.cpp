@@ -356,8 +356,26 @@ int main()
 
 	pairTipe G(4);
 	G.printPair();
+	std::cout << std::endl;
+	G.Kruskal();
+	std::cout << std::endl;
+
+	/*G.Prima();
 	std::cout << std::endl << std::endl;
-	G.Prima(0);
+	std::vector< std::vector <std::pair <int, int> > > minOstov;
+	minOstov = G.GetminOstov();
+	std::cout << "minOstov:" << std::endl << std::endl;
+	for (int i = 0; i < G.getNumVert(); i++)
+	{
+		for (int j = 0; j < G.getNumVert(); j++)
+		{
+			std::cout << "(" << minOstov[i][j].first << "," << minOstov[i][j].second << ") ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl << std::endl;*/
+	
+	G.Prima();
 	std::cout << std::endl << std::endl;
 	std::vector< std::vector <std::pair <int, int> > > minOstov;
 	minOstov = G.GetminOstov();
@@ -371,19 +389,11 @@ int main()
 		std::cout << std::endl;
 	}
 	std::cout << std::endl << std::endl;
-	std::cout << "TEST CLUSTERING: " << std::endl << std::endl;
-	std::vector< std::vector <int>> v{
-		{0,1,0,0},
-		{1,0,0,0},
-		{0,0,0,1},
-		{0,0,1,0}
-	};
-	matrixType g(v, 4);
-	pairTipe GG(g);
-
-	GG.Prima(0);
-	clusteringg(GG, 2);
-
+		std::cout << "TEST CLUSTERING: " << std::endl << std::endl;
+	clusteringg(G, 2);
+	int n = G.numComponents(0, 7); //incoorect!	//нужен фикс подсчета компонент связности!!!!
+	std::cout << std::endl << std::endl;
+	std::cout << n;
 	
 
 	return 0;

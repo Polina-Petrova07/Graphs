@@ -349,7 +349,7 @@ public:
 		{
 			for (int i = 0; i < this->numVert; i++)
 				used.push_back(false);
-			f == 0;
+			f = 0;
 		}
 		std::cout << start << " ";
 		used[start] = true;
@@ -379,7 +379,7 @@ public:
 		{
 			for (int i = 0; i < this->numVert; i++)
 				used.push_back(false);
-			ff == 0;
+			ff = 0;
 		}
 		n = 0;
 		for (int i = 0; i < numVert; i++)
@@ -567,7 +567,7 @@ public:
 			}
 		}
 	}
-	void Prima(int start) 
+	void Prima()  
 	{
 		for (int i = 0; i < numVert; i++)
 		{
@@ -613,7 +613,7 @@ public:
 				}
 			}
 		}
-		std::cout << "Minimum spanning tree wight: " << mst_weight << std::endl;
+		std::cout << "(alg. PRIMA) Minimum spanning tree wight: " << mst_weight << std::endl;
 		for (int i = 0; i < minOst.size(); i++)
 		{
 			minOstov[minOst[i].first][minOst[i].second].second = this->Graph[minOst[i].first][minOst[i].second].second;
@@ -623,6 +623,45 @@ public:
 		for (int i = 0; i < minOst.size(); i++)
 			std::cout << minOst[i].first << ";"<< minOst[i].second<<"  ";
 		std::cout << std::endl << std::endl;
+	}
+
+	void Kruskal()   
+	{
+		std::vector<std::pair<int, std::pair<int, int>>> g;
+		for (int i = 0; i < this->numVert; i++)
+		{
+			for (int j = 0; j < this->numVert; j++)
+			{
+				std::pair<int, std::pair<int, int>> tmp;
+				tmp.first = this->Graph[i][j].second;
+				tmp.second.first = i;
+				tmp.second.second = j;
+				g.push_back(tmp);
+			}
+		}
+		int cost = 0;
+		std::vector<std::pair<int, int>> res;
+		std::sort(g.begin(), g.end());
+		std::vector<int> tree_id(this->numVert);
+		for (int i = 0; i < this->numVert; ++i)
+			tree_id[i] = i;
+		for (int i = 0; i < g.size(); ++i)
+		{
+			int a = g[i].second.first;
+			int b = g[i].second.second;
+			int l = g[i].first;
+			if (tree_id[a] != tree_id[b])
+			{
+				cost += l;
+				res.push_back(std::make_pair(a, b));
+				int old_id = tree_id[b];
+				int new_id = tree_id[a];
+				for (int j = 0; j < this->numVert; ++j)
+					if (tree_id[j] == old_id)
+						tree_id[j] = new_id;
+			}
+		}
+		std::cout << "(alg. KRUSKALA) Minimum spanning tree wight: " << cost << std::endl;
 	}
 	std::vector< std::vector <std::pair <int, int> > > GetminOstov()  // can only be called after function "Prima"
 	{
@@ -642,7 +681,7 @@ public:
 			if (!used[i] && (this->minOstov[start][i].second != 0))
 				DFS(i, f);
 	}
-	int numComponents(int n,int f) // for minOstov (in algoritm clustering)
+	int numComponents(int n,int f) // for minOstov (check algoritm clustering)
 	{
 		if (f != 0)  // crutch
 		{
@@ -665,7 +704,6 @@ public:
 	{
 		this->minOstov = newMinOstov;
 	}
-	//  int ff = 5;
 
 	void printPair()
 	{
@@ -681,12 +719,38 @@ public:
 		}
 	}
 };
-void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G
+
+void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used minOstov, which generate in alg Prima)
 {
 	int maxEg = INT_MIN;
 	std::vector<std::vector<std::pair<int, int>>> saveMinOstov = G.GetminOstov();
 	int currentComp = 0;
-	while (currentComp <= n)
+	for (int k = 0; k < n - 1; k++)
+	{
+		int currentI = 0, currentJ = 0;
+		for (int i = 0; i < saveMinOstov.size(); i++)
+		{
+			for (int j = 0; j < saveMinOstov.size(); j++)
+			{
+				if (saveMinOstov[i][j].second > maxEg)
+				{
+					maxEg = saveMinOstov[i][j].second;
+					currentI = i;
+					currentJ = j;
+				}
+			}
+		}
+		saveMinOstov[currentI][currentJ].second = 0;  // delete max edge
+	}
+	for (int i = 0; i < saveMinOstov.size(); i++)
+	{
+		for (int j = 0; j < saveMinOstov.size(); j++)
+		{
+			std::cout << "(" << saveMinOstov[i][j].first << "," << saveMinOstov[i][j].second << ") ";
+		}
+		std::cout << std::endl;
+	}
+	/*while (currentComp <= n)
 	{
 		int currentI = 0, currentJ = 0;
 		for (int i = 0; i < saveMinOstov.size(); i++)
@@ -703,6 +767,6 @@ void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G
 		G.createNewMinOstov(saveMinOstov);
 		currentComp = G.numComponents(0, 7);
 	}
-	std::cout << "I DO ALL, NUM CLASTERS = " << currentComp;
+	std::cout << "I DO ALL, NUM CLASTERS = " << currentComp;*/
 }
 
