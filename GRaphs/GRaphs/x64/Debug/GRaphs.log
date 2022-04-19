@@ -1,0 +1,11 @@
+﻿  GRaphs.cpp
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(247,1): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(291,1): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(446,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(584,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(26,1): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+  GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\x64\Debug\GRaphs.exe

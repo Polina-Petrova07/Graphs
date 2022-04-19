@@ -314,7 +314,7 @@ public:
 		queue.push(start);
 		std::vector<int> dist(this->numVert);
 		std::vector<int> par(this->numVert);
-		std::vector<bool> used(this->numVert+1);
+		std::vector<bool> used(this->numVert);
 		used[start] = true;
 		par[start] = -1;
 		while (!queue.empty())
@@ -582,7 +582,7 @@ public:
 		}
 		
 		const int INF = 1e9 + 7;
-		std::vector<bool> used(this->numVert + 1);
+		std::vector<bool> used(this->numVert);
 		int mst_weight = 0;
 		std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> q;
 		q.push({ 0, 0 });
@@ -667,7 +667,10 @@ public:
 	{
 		return this->minOstov;
 	}
-
+	void setMinOstov(std::vector<std::vector<std::pair<int, int>>> minOstovNew)
+	{
+		this->minOstov = minOstovNew;
+	}
 	void DFS(int start, int f)  // dfs for minOstov
 	{
 		if (f != 0)  //  crutch
@@ -677,7 +680,7 @@ public:
 			f = 0;  
 		}
 		used[start] = true;
-		for (int i = 0; i < this->minOstov[start].size(); i++)
+		for (int i = 0; i < this->minOstov.size(); i++)
 			if (!used[i] && (this->minOstov[start][i].second != 0))
 				DFS(i, f);
 	}
@@ -750,6 +753,8 @@ void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used m
 		}
 		std::cout << std::endl;
 	}
+
+	G.setMinOstov(saveMinOstov);
 	/*while (currentComp <= n)
 	{
 		int currentI = 0, currentJ = 0;
