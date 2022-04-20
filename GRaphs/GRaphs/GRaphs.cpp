@@ -13,6 +13,14 @@
 #include "stdio.h"
 #include "matrixType.h"
 #include "crsType.h"
+#include <fstream>
+#include <string>
+#include <utility>
+#include <sstream>
+#include <cmath>
+#include <tuple>
+#include <algorithm>
+#include <chrono>
 
 #if defined(INPUT)
 //int NUMVERTEX;
@@ -264,6 +272,43 @@ int mas[NUMVERTEX][NUMVERTEX] = {
 //	}
 //};
 
+
+int target(std::string& s) {
+	if (s == "Iris_setosa") {
+		return 1;
+	}
+	else if (s == "Iris_versicolor") {
+		return 2;
+	}
+	else {
+		return 3;
+	}
+}
+
+class Iris_dataset {
+public:
+	float sepal_len, sepal_width, petal_len, petal_width;
+	int target;
+	Iris_dataset(float sepal_len, float sepal_width, float petal_len, float petal_width, int target) {
+		this->sepal_len = sepal_len;
+		this->sepal_width = sepal_width;
+		this->petal_len = petal_len;
+		this->petal_width = petal_width;
+		this->target = target;
+	}
+	friend std::ostream& operator<< (std::ostream& out, const Iris_dataset& data);
+};
+
+std::ostream& operator<<(std::ostream& out, const Iris_dataset& data) {
+	out << data.sepal_len << " " << data.sepal_width << " " << data.petal_len << " " << data.petal_width << " " << data.target << "\n";
+	return out;
+}
+
+double distance(Iris_dataset p, Iris_dataset q)
+{
+	// считать евклидово расстояние 
+}
+
 int main()
 {
 	int start = 0;
@@ -377,7 +422,7 @@ int main()
 	
 	G.Prima();
 	std::cout << std::endl << std::endl;
-	std::vector< std::vector <std::pair <int, int> > > minOstov;
+	std::vector< std::vector <std::pair <int, double> > > minOstov;
 	minOstov = G.GetminOstov();
 	std::cout << "minOstov:" << std::endl << std::endl;
 	for (int i = 0; i < G.getNumVert(); i++)
@@ -394,7 +439,38 @@ int main()
 	int n = G.numComponents(0, 7); //incoorect!	//нужен фикс подсчета компонент связности!!!!
 	std::cout << std::endl << std::endl;
 	std::cout << n;
-	
+
+
+	system("cls");
+
+
+
+	std::ifstream myfile("iris.data");
+	std::vector <Iris_dataset> iris;
+	if (myfile.is_open()) {
+		std::cout << "The file is open" << "\n";
+		std::string str;
+		while (std::getline(myfile, str)) {
+			std::replace(str.begin(), str.end(), ',', ' ');
+			std::replace(str.begin(), str.end(), '-', '_');
+			std::istringstream ss(str);
+			float sepal_len, sepal_width, petal_len, petal_width;
+			std::string temp;
+			ss >> sepal_len >> sepal_width >> petal_len >> petal_width >> temp;
+			Iris_dataset x(sepal_len, sepal_width, petal_len, petal_width, target(temp));
+			iris.push_back(x);
+		}
+		int n = (int)iris.size();
+		Graph g(n);
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (i != j) {
+					g.add_edge(i, j, distance(iris[i], iris[j]));
+				}
+			}
+		}
+
+	}
 
 	return 0;
 }

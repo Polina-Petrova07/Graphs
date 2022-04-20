@@ -469,8 +469,8 @@ public:
 };
 class pairTipe {
 private:
-	std::vector< std::vector <std::pair <int, int> > > Graph;
-	std::vector< std::vector <std::pair <int, int> > > minOstov;
+	std::vector< std::vector <std::pair <int, double> > > Graph;
+	std::vector< std::vector <std::pair <int, double> > > minOstov;
 	int numVert;
 public:
 	std::vector<bool> used;
@@ -488,7 +488,7 @@ public:
 		this->numVert = n;
 		for (int i = 0; i < numVert; i++)
 		{
-			Graph.push_back(std::vector< std::pair<int, int> >());
+			Graph.push_back(std::vector< std::pair<int, double> >());
 			for (int j = 0; j < numVert; j++)
 			{
 				Graph[i].push_back(std::make_pair(0, 0));
@@ -518,7 +518,7 @@ public:
 		this->numVert = G.getNumVert();
 		for (int i = 0; i < numVert; i++)
 		{
-			Graph.push_back(std::vector< std::pair<int, int> >());
+			Graph.push_back(std::vector< std::pair<int, double> >());
 			for (int j = 0; j < numVert; j++)
 			{
 				Graph[i].push_back(std::make_pair(0,0));
@@ -571,7 +571,7 @@ public:
 	{
 		for (int i = 0; i < numVert; i++)
 		{
-			minOstov.push_back(std::vector< std::pair<int, int> >());
+			minOstov.push_back(std::vector< std::pair<int, double> >());
 			for (int j = 0; j < numVert; j++)
 			{
 				minOstov[i].push_back(std::make_pair(0, 0));
@@ -624,10 +624,29 @@ public:
 			std::cout << minOst[i].first << ";"<< minOst[i].second<<"  ";
 		std::cout << std::endl << std::endl;
 	}
-
+	std::vector<std::pair<double, std::pair<int, int>>> convertInthisType()  // вес - вершина 1 - вершина 2
+	{
+		std::vector<std::pair<double, std::pair<int, int>>> g;
+		for (int i = 0; i < this->numVert; i++)
+		{
+			for (int j = 0; j < this->numVert; j++)
+			{
+				std::pair<int, std::pair<int, int>> tmp;
+				tmp.first = this->Graph[i][j].second;
+				tmp.second.first = i;
+				tmp.second.second = j;
+				g.push_back(tmp);
+			}
+		}
+		return g;
+	}
+	void add_edge(int i,int j, double distance)
+	{
+		this->Graph[i][j].second = distance;
+	}
 	void Kruskal()   
 	{
-		std::vector<std::pair<int, std::pair<int, int>>> g;
+		std::vector<std::pair<double, std::pair<int, int>>> g;
 		for (int i = 0; i < this->numVert; i++)
 		{
 			for (int j = 0; j < this->numVert; j++)
@@ -663,11 +682,11 @@ public:
 		}
 		std::cout << "(alg. KRUSKALA) Minimum spanning tree wight: " << cost << std::endl;
 	}
-	std::vector< std::vector <std::pair <int, int> > > GetminOstov()  // can only be called after function "Prima"
+	std::vector< std::vector <std::pair <int, double> > > GetminOstov()  // can only be called after function "Prima"
 	{
 		return this->minOstov;
 	}
-	void setMinOstov(std::vector<std::vector<std::pair<int, int>>> minOstovNew)
+	void setMinOstov(std::vector<std::vector<std::pair<int, double>>> minOstovNew)
 	{
 		this->minOstov = minOstovNew;
 	}
@@ -703,7 +722,7 @@ public:
 		}
 		return n;
 	}
-	void createNewMinOstov(std::vector<std::vector<std::pair<int, int>>> newMinOstov)
+	void createNewMinOstov(std::vector<std::vector<std::pair<int, double>>> newMinOstov)
 	{
 		this->minOstov = newMinOstov;
 	}
@@ -722,11 +741,75 @@ public:
 		}
 	}
 };
+/* =============== this class nafig unnecessary ===================*/
+class newTypeForIris
+{
+private:
+	std::vector<std::pair<double, std::pair<int, int>>> Graph;
+	int numVert;
+public:
+
+	newTypeForIris(int n)
+	{
+		this->numVert = n;
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				std::pair<double, std::pair<int, int>> tmp;
+				tmp.first = 0; // weight = 0
+				tmp.second.first = i;
+				tmp.second.second = j;
+				this->Graph.push_back(tmp);
+			}
+		}
+	}
+	std::vector<std::pair<int, int>> res; // min ostov
+	void Kruskal()
+	{
+		int cost = 0;
+		//std::vector<std::pair<int, int>> res;
+		std::sort(this->Graph.begin(), this->Graph.end());
+		std::vector<int> tree_id(this->numVert);
+		for (int i = 0; i < this->numVert; ++i)
+			tree_id[i] = i;
+		for (int i = 0; i < this->Graph.size(); ++i)
+		{
+			int a = this->Graph[i].second.first;
+			int b = this->Graph[i].second.second;
+			int l = this->Graph[i].first;
+			if (tree_id[a] != tree_id[b])
+			{
+				cost += l;
+				res.push_back(std::make_pair(a, b));
+				int old_id = tree_id[b];
+				int new_id = tree_id[a];
+				for (int j = 0; j < this->numVert; ++j)
+					if (tree_id[j] == old_id)
+						tree_id[j] = new_id;
+			}
+		}
+		std::cout << "(alg. KRUSKALA) Minimum spanning tree wight: " << cost << std::endl;
+	}
+	void add_edge(int i, int j, double distance)
+	{
+		this->Graph;
+	}
+	void print()  // need fix;
+	{
+		for (int i = 0; i < this->numVert; i++)
+		{
+			std::cout << "Between " << this->Graph[i].second.first << " and " << this->Graph[i].second.second << " weight is: " << this->Graph[i].first;
+			std::cout << std::endl;
+		}
+	}
+
+};
 
 void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used minOstov, which generate in alg Prima)
 {
 	int maxEg = INT_MIN;
-	std::vector<std::vector<std::pair<int, int>>> saveMinOstov = G.GetminOstov();
+	std::vector<std::vector<std::pair<int, double>>> saveMinOstov = G.GetminOstov();
 	int currentComp = 0;
 	for (int k = 0; k < n - 1; k++)
 	{
@@ -744,6 +827,7 @@ void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used m
 			}
 		}
 		saveMinOstov[currentI][currentJ].second = 0;  // delete max edge
+		maxEg = 0;
 	}
 	for (int i = 0; i < saveMinOstov.size(); i++)
 	{
@@ -754,7 +838,7 @@ void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used m
 		std::cout << std::endl;
 	}
 
-	G.setMinOstov(saveMinOstov);
+	//G.setMinOstov(saveMinOstov);
 	/*while (currentComp <= n)
 	{
 		int currentI = 0, currentJ = 0;
