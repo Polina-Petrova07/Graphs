@@ -304,9 +304,20 @@ std::ostream& operator<<(std::ostream& out, const Iris_dataset& data) {
 	return out;
 }
 
-double distance(Iris_dataset p, Iris_dataset q)
+float distance(Iris_dataset p, Iris_dataset q)  // считать евклидово расстояние 
 {
-	// считать евклидово расстояние 
+	float res = 0.0;
+	float firstCoordinate = 0.0;
+	float secondCoordinate = 0.0;
+	float thirdCoordinate = 0.0;
+	float forthCoordinate = 0.0;
+
+	firstCoordinate = p.sepal_len - q.sepal_len;
+	secondCoordinate = p.sepal_width - q.sepal_width;
+	thirdCoordinate = p.petal_len - q.petal_len;
+	forthCoordinate = p.petal_width - q.petal_width;
+	res = sqrtf(firstCoordinate * firstCoordinate + secondCoordinate * secondCoordinate + thirdCoordinate * thirdCoordinate + forthCoordinate * forthCoordinate);
+	return res;
 }
 
 int main()
@@ -399,7 +410,7 @@ int main()
 	//std::cout << std::endl;
 	//std::cout << "BFS standart  time: " << (t4 - t3) / 1000 << " sec" << std::endl;
 
-	pairTipe G(4);
+	pairType G(4);
 	G.printPair();
 	std::cout << std::endl;
 	G.Kruskal();
@@ -443,9 +454,16 @@ int main()
 
 	system("cls");
 
+	pairType DT(3, true);
+	DT.printPair();
+	std::cout << std::endl << std::endl;
+	DT.add_edge(0, 1, 7);
+	DT.add_edge(2, 2, 17.7);
+	DT.printPair();
 
+	system("cls");
 
-	std::ifstream myfile("iris.data");
+	std::ifstream myfile("C:\\Users\\user\\Desktop\\iris.data");
 	std::vector <Iris_dataset> iris;
 	if (myfile.is_open()) {
 		std::cout << "The file is open" << "\n";
@@ -461,15 +479,16 @@ int main()
 			iris.push_back(x);
 		}
 		int n = (int)iris.size();
-		Graph g(n);
+		pairType GI(n, true);
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (i != j) {
-					g.add_edge(i, j, distance(iris[i], iris[j]));
+					GI.add_edge(i, j, distance(iris[i], iris[j]));
 				}
 			}
 		}
-
+		GI.Prima();
+		clusteringg(GI, 3);
 	}
 
 	return 0;

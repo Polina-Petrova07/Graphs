@@ -467,7 +467,7 @@ public:
 		}
 	}
 };
-class pairTipe {
+class pairType {
 private:
 	std::vector< std::vector <std::pair <int, double> > > Graph;
 	std::vector< std::vector <std::pair <int, double> > > minOstov;
@@ -483,7 +483,7 @@ public:
 		k = dist(gen);
 		return k;
 	}
-	pairTipe(int n)
+	pairType(int n)
 	{
 		this->numVert = n;
 		for (int i = 0; i < numVert; i++)
@@ -513,7 +513,45 @@ public:
 			}
 		}
 	}
-	pairTipe(matrixType G)
+	pairType(int n, bool f)  // f - check for weight (if f == true - weight for each equals 0 )
+	{
+		if (f == false)
+		{
+			// call pairType(int n)
+		}
+			
+		if (f == true)
+		{
+			this->numVert = n;
+			for (int i = 0; i < numVert; i++)
+			{
+				Graph.push_back(std::vector< std::pair<int, double> >());
+				for (int j = 0; j < numVert; j++)
+				{
+					Graph[i].push_back(std::make_pair(0, 0));
+					if (i == j)
+					{
+						Graph[i][j].first = j;
+						Graph[i][j].second = 0;
+					}
+					else
+					{
+						Graph[i][j].first = j;
+						Graph[i][j].second = 0;
+					}
+
+				}
+			}
+			for (int i = 0; i < numVert; i++)
+			{
+				for (int j = 0; j < numVert; j++)
+				{
+					Graph[i][j].second = Graph[j][i].second;
+				}
+			}
+		}
+	}
+	pairType(matrixType G)
 	{
 		this->numVert = G.getNumVert();
 		for (int i = 0; i < numVert; i++)
@@ -620,8 +658,8 @@ public:
 		}
 
 		std::cout << std::endl;
-		for (int i = 0; i < minOst.size(); i++)
-			std::cout << minOst[i].first << ";"<< minOst[i].second<<"  ";
+		// for (int i = 0; i < minOst.size(); i++)  enters minOstov
+			// std::cout << minOst[i].first << ";"<< minOst[i].second<<"  ";
 		std::cout << std::endl << std::endl;
 	}
 	std::vector<std::pair<double, std::pair<int, int>>> convertInthisType()  // вес - вершина 1 - вершина 2
@@ -806,7 +844,7 @@ public:
 
 };
 
-void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used minOstov, which generate in alg Prima)
+void clusteringg(pairType G, int n)  // !only after algoritm Prima for G (used minOstov, which generate in alg Prima)
 {
 	int maxEg = INT_MIN;
 	std::vector<std::vector<std::pair<int, double>>> saveMinOstov = G.GetminOstov();
@@ -829,14 +867,14 @@ void clusteringg(pairTipe G, int n)  // !only after algoritm Prima for G (used m
 		saveMinOstov[currentI][currentJ].second = 0;  // delete max edge
 		maxEg = 0;
 	}
-	for (int i = 0; i < saveMinOstov.size(); i++)
+	/*for (int i = 0; i < saveMinOstov.size(); i++)
 	{
 		for (int j = 0; j < saveMinOstov.size(); j++)
 		{
 			std::cout << "(" << saveMinOstov[i][j].first << "," << saveMinOstov[i][j].second << ") ";
 		}
 		std::cout << std::endl;
-	}
+	}*/
 
 	//G.setMinOstov(saveMinOstov);
 	/*while (currentComp <= n)

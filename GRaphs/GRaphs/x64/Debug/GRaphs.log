@@ -2,22 +2,13 @@
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(247,1): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(291,1): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(446,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(547,37): warning C4244: инициализация: преобразование "_Ty2" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(585,37): warning C4244: инициализация: преобразование "_Ty2" в "int", возможна потеря данных
           with
           [
               _Ty2=double
           ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(584,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(635,34): warning C4244: =: преобразование "_Ty2" в "_Ty1", возможна потеря данных
-          with
-          [
-              _Ty2=double
-          ]
-          and
-          [
-              _Ty1=int
-          ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(655,34): warning C4244: =: преобразование "_Ty2" в "_Ty1", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(622,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(673,34): warning C4244: =: преобразование "_Ty2" в "_Ty1", возможна потеря данных
           with
           [
               _Ty2=double
@@ -26,12 +17,26 @@ C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(655,34): warning C4244: =: пр�
           [
               _Ty1=int
           ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(671,10): warning C4244: инициализация: преобразование "_Ty1" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(693,34): warning C4244: =: преобразование "_Ty2" в "_Ty1", возможна потеря данных
+          with
+          [
+              _Ty2=double
+          ]
+          and
+          [
+              _Ty1=int
+          ]
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(709,10): warning C4244: инициализация: преобразование "_Ty1" в "int", возможна потеря данных
           with
           [
               _Ty1=double
           ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(790,32): warning C4244: =: преобразование "_Ty2" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(818,10): warning C4244: инициализация: преобразование "_Ty1" в "int", возможна потеря данных
+          with
+          [
+              _Ty1=double
+          ]
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(861,32): warning C4244: =: преобразование "_Ty2" в "int", возможна потеря данных
           with
           [
               _Ty2=double
@@ -50,6 +55,6 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
           [
               _Ty2=int
           ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(605): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<int,double,0>(const std::pair<int,double> &) noexcept"
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(605): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<int,double,0>(const std::pair<int,double> &) noexcept"
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(643): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<int,double,0>(const std::pair<int,double> &) noexcept"
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(643): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<int,double,0>(const std::pair<int,double> &) noexcept"
   GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\x64\Debug\GRaphs.exe
