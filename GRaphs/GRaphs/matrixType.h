@@ -825,7 +825,6 @@ public:
 	void Kruskal()
 	{
 		double cost = 0;
-		//std::vector<std::pair<int, int>> res;
 		std::sort(this->Graph.begin(), this->Graph.end());
 		std::vector<int> tree_id(this->numVert);
 		for (int i = 0; i < this->numVert; ++i)
