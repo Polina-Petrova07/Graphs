@@ -471,6 +471,7 @@ class pairType {
 private:
 	std::vector< std::vector <std::pair <int, double> > > Graph;
 	std::vector< std::vector <std::pair <int, double> > > minOstov;
+	std::vector< std::vector <std::pair <int, double> > > minOstovForKruskal; // ?
 	int numVert;
 public:
 	std::vector<bool> used;
@@ -686,6 +687,7 @@ public:
 	}
 	void Kruskal()   
 	{
+		this->minOstovForKruskal = this->Graph;
 		std::vector<std::pair<double, std::pair<int, int>>> g; // w from a to b
 		for (int i = 0; i < this->numVert; i++)
 		{
@@ -793,6 +795,8 @@ public:
 			std::cout << std::endl;
 		}
 	}
+
+
 };
 /* =============== this class nafig unnecessary ===================*/
 class newTypeForIris
