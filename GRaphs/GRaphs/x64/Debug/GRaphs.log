@@ -2,59 +2,37 @@
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(247,1): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(291,1): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
 C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(446,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(585,37): warning C4244: инициализация: преобразование "_Ty2" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(587,37): warning C4244: инициализация: преобразование "_Ty2" в "int", возможна потеря данных
           with
           [
               _Ty2=double
           ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(622,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(673,34): warning C4244: =: преобразование "_Ty2" в "_Ty1", возможна потеря данных
-          with
-          [
-              _Ty2=double
-          ]
-          and
-          [
-              _Ty1=int
-          ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(693,34): warning C4244: =: преобразование "_Ty2" в "_Ty1", возможна потеря данных
-          with
-          [
-              _Ty2=double
-          ]
-          and
-          [
-              _Ty1=int
-          ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(709,10): warning C4244: инициализация: преобразование "_Ty1" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(624,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(635,12): warning C4244: инициализация: преобразование "_Ty1" в "int", возможна потеря данных
           with
           [
               _Ty1=double
-          ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(818,10): warning C4244: инициализация: преобразование "_Ty1" в "int", возможна потеря данных
-          with
-          [
-              _Ty1=double
-          ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(861,32): warning C4244: =: преобразование "_Ty2" в "int", возможна потеря данных
-          with
-          [
-              _Ty2=double
           ]
 C:\Users\user\Graphs\GRaphs\GRaphs\crsType.h(26,1): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\utility(221,1): warning C4244: инициализация: преобразование "const _Ty2" в "_Ty2", возможна потеря данных
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\utility(192,16): warning C4244: инициализация: преобразование "double" в "_Ty1", возможна потеря данных
           with
           [
-              _Ty2=double
+              _Ty1=int
           ]
-          and
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(651): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<double&,int&,0>(_Other1,_Other2) noexcept"
+          with
           [
-              _Ty2=int
+              _Other1=double &,
+              _Other2=int &
           ]
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(643): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<int,double,0>(const std::pair<int,double> &) noexcept"
-C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(643): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<int,double,0>(const std::pair<int,double> &) noexcept"
+C:\Users\user\Graphs\GRaphs\GRaphs\matrixType.h(651): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<int,int>::pair<double&,int&,0>(_Other1,_Other2) noexcept"
+          with
+          [
+              _Other1=double &,
+              _Other2=int &
+          ]
   GRaphs.vcxproj -> C:\Users\user\Graphs\GRaphs\x64\Debug\GRaphs.exe

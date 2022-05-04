@@ -515,13 +515,14 @@ public:
 	}
 	pairType(int n, bool f)  // f - check for weight (if f == true - weight for each equals 0 )
 	{
+		
 		if (f == false)
 		{
 			// call pairType(int n)
 		}
 			
 		if (f == true)
-		{
+		{	
 			this->numVert = n;
 			for (int i = 0; i < numVert; i++)
 			{
@@ -550,6 +551,7 @@ public:
 				}
 			}
 		}
+
 	}
 	pairType(matrixType G)
 	{
@@ -605,7 +607,7 @@ public:
 			}
 		}
 	}
-	void Prima()  
+	void Prima()  // trubles with int and double
 	{
 		for (int i = 0; i < numVert; i++)
 		{
@@ -621,14 +623,14 @@ public:
 		
 		const int INF = 1e9 + 7;
 		std::vector<bool> used(this->numVert);
-		int mst_weight = 0;
+		double mst_weight = 0.0;
 		std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> q;
 		q.push({ 0, 0 });
 		int saveV = 0;
 		std::vector<std::pair<int, int>> minOst;
 		while (!q.empty()) 
 		{
-			std::pair<int, int> c = q.top();
+			std::pair<double, int> c = q.top();
 			q.pop();
 			int dst = c.first, v = c.second;
 			if (used[v])
@@ -640,10 +642,10 @@ public:
 			used[v] = true;
 			mst_weight += dst;
 			minOst.push_back({ saveV,v });
-			for (std::pair<int,int> e: this->Graph[v])
+			for (std::pair<int,double> e: this->Graph[v])
 			{
 				int u = e.first;
-				int len_vu = e.second;
+				double len_vu = e.second;
 				if (!used[u])
 				{
 					q.push({ len_vu,u });
@@ -669,7 +671,7 @@ public:
 		{
 			for (int j = 0; j < this->numVert; j++)
 			{
-				std::pair<int, std::pair<int, int>> tmp;
+				std::pair<double, std::pair<int, int>> tmp;
 				tmp.first = this->Graph[i][j].second;
 				tmp.second.first = i;
 				tmp.second.second = j;
@@ -684,19 +686,19 @@ public:
 	}
 	void Kruskal()   
 	{
-		std::vector<std::pair<double, std::pair<int, int>>> g;
+		std::vector<std::pair<double, std::pair<int, int>>> g; // w from a to b
 		for (int i = 0; i < this->numVert; i++)
 		{
 			for (int j = 0; j < this->numVert; j++)
 			{
-				std::pair<int, std::pair<int, int>> tmp;
+				std::pair<double, std::pair<int, int>> tmp;
 				tmp.first = this->Graph[i][j].second;
 				tmp.second.first = i;
 				tmp.second.second = j;
 				g.push_back(tmp);
 			}
 		}
-		int cost = 0;
+		double cost = 0;
 		std::vector<std::pair<int, int>> res;
 		std::sort(g.begin(), g.end());
 		std::vector<int> tree_id(this->numVert);
@@ -706,7 +708,7 @@ public:
 		{
 			int a = g[i].second.first;
 			int b = g[i].second.second;
-			int l = g[i].first;
+			double l = g[i].first;
 			if (tree_id[a] != tree_id[b])
 			{
 				cost += l;
@@ -778,6 +780,19 @@ public:
 			std::cout << std::endl;
 		}
 	}
+	void printMinOstov()
+	{
+		std::cout << std::endl;
+		std::cout << "minOstov from this graph:" << std::endl << std::endl;
+		for (int i = 0; i < numVert; i++)
+		{
+			for (int j = 0; j < numVert; j++)
+			{
+				std::cout << "(" << minOstov[i][j].first << "," << minOstov[i][j].second << ") ";
+			}
+			std::cout << std::endl;
+		}
+	}
 };
 /* =============== this class nafig unnecessary ===================*/
 class newTypeForIris
@@ -805,7 +820,7 @@ public:
 	std::vector<std::pair<int, int>> res; // min ostov
 	void Kruskal()
 	{
-		int cost = 0;
+		double cost = 0;
 		//std::vector<std::pair<int, int>> res;
 		std::sort(this->Graph.begin(), this->Graph.end());
 		std::vector<int> tree_id(this->numVert);
@@ -815,7 +830,7 @@ public:
 		{
 			int a = this->Graph[i].second.first;
 			int b = this->Graph[i].second.second;
-			int l = this->Graph[i].first;
+			double l = this->Graph[i].first;
 			if (tree_id[a] != tree_id[b])
 			{
 				cost += l;
@@ -846,7 +861,7 @@ public:
 
 void clusteringg(pairType G, int n)  // !only after algoritm Prima for G (used minOstov, which generate in alg Prima)
 {
-	int maxEg = INT_MIN;
+	double maxEg = -10.0;
 	std::vector<std::vector<std::pair<int, double>>> saveMinOstov = G.GetminOstov();
 	int currentComp = 0;
 	for (int k = 0; k < n - 1; k++)

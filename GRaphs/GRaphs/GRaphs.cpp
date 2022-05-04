@@ -447,9 +447,9 @@ int main()
 	std::cout << std::endl << std::endl;
 		std::cout << "TEST CLUSTERING: " << std::endl << std::endl;
 	clusteringg(G, 2);
-	int n = G.numComponents(0, 7); //incoorect!	//нужен фикс подсчета компонент связности!!!!
-	std::cout << std::endl << std::endl;
-	std::cout << n;
+	//int n = G.numComponents(0, 7); //incoorect!	//нужен фикс подсчета компонент связности!!!!
+	//std::cout << std::endl << std::endl;
+	//std::cout << n;
 
 
 	system("cls");
@@ -487,8 +487,11 @@ int main()
 				}
 			}
 		}
-		GI.Prima();
+		
+		std::cout << std::endl;
+		GI.Kruskal();
 		clusteringg(GI, 3);
+		//GI.printMinOstov();
 	}
 
 	return 0;
